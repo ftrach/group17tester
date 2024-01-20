@@ -32,3 +32,4 @@ If there is an excessive amount of work responsibilities not being fulfilled, th
 
 ## 8. Signatures
 - Louie Tse 1/16/2024
+- Muhammad Sharif 1/19/2024
