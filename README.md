@@ -17,6 +17,10 @@ In this project, this website will be tailored for customers shopping on a websi
 
 This tool will allow you to have all the functionality that you need in order to add, remove, and edit products into the shop. This will give the user all that they need to edit their website in any way. This will remove the need to consistently contact the developers. This will also make it incredibly easy to update the website in an effortless and smooth manner.
 
+### Cart
+
+We will be creating a cart function so users can buy multiple items at once. 
+
 ### Payment Portal
 
 This will be the tool that allows the website in order to receive payments. We will be using Stripe which is generally considered the industry standard. 
@@ -31,6 +35,7 @@ This will  organise all the orders and payments to be able to keep track of ever
  PostgreSQL, Prisma ORM with Firebase, Express 
 
 The back-end will use a cloud-based PostgreSQL database from [Firebase](https://firebase.google.com/). Data will then be fetched in an intuitive way using [Prisma](https://prisma.io/).
+Firebase also has it'/s own NoSql database called Firestore which may be used to run the entire application. 
 
 ### Front-End
 
@@ -40,6 +45,10 @@ The front-end UI will be developed using a NextJS framework, and all styling wil
 ### Developing Tools
 
 This website was developed using [Visual Studio Code](https://code.visualstudio.com/) with Typescript,Prisma extensions. [Postman](https://www.postman.com/) will be used to test all API routes from our application. Stripe services will be used for all transactional based actions. [Github](https://www.github.com/) will be our primary source of code collaboration.
+
+### Theme
+
+We will be choosing a theme for this templated project which will use mock data, for products. We plan on creating a clothing store. 
 
 
 
