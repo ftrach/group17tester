@@ -35,3 +35,4 @@ If there is an excessive amount of work responsibilities not being fulfilled, th
 - Louie Tse 1/16/2024
 - Muhammad Sharif 1/19/2024
 - Daniil Sen 1/20/2024
+- Francis Trach 1/25/2024
