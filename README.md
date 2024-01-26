@@ -3,7 +3,7 @@
 ## Developers
 | Name        |   Role |     Github    | Email       |
 | ----------- | --------- | --------- | --------------------------- |
-| Louie Tse | Full Stack Developer | lttse| lttse@myseneca.ca |
+| Louie Tse | Full Stack Developer | tselouie| lttse@myseneca.ca |
 | Muhammad Sharif  | Full Stack Developer  | muhammadssharif | msharif28@myseneca.ca |
 | Daniil Sen  | Full Stack Developer | Daniil-Sen | dsen5@myseneca.ca |
 | Francis Trach  |  Full Stack Developer | ftrach | ftrach@myseneca.ca |
