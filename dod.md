@@ -2,7 +2,7 @@
 
 ## User Stories
 
-- User story meets all acceptance criteria.
+- We completed all acceptance criteria of the user story.
 - We wrote automated tests that pass.
 - We wrote the code.
 - We documented the code and behaviour of the code.
@@ -12,7 +12,7 @@
 - Code builds without errors.
 - Peer code review is performed.
 - Refactoring code is completed if required.
-- The code is successfully deployed to the server.
+- Code is successfully deployed to the server.
 
 ## Sprint
 
