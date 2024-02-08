@@ -11,7 +11,7 @@
 ## Project Description
 
 
-In this project, this website will be tailored for customers shopping on a website. This website will feature all the tools that you need in order to purchase items online regardless of the type of items that will be for sale on the website. This project will have a fully complete “template” in order to create a fully functioning website that will allow you  to buy items of any kind depending on the type of shop that you would like to create.
+In this project, this website will be tailored for customers shopping on a website. The theme for the website will be a clothing store, a single clothing store owner selling their products to their clients online. This website will feature all the tools that you need in order to purchase items online regardless of the type of items that will be for sale on the website. This project will have a fully complete “template” in order to create a fully functioning website that will allow you  to buy items of any kind depending on the type of shop that you would like to create.
 
 ### Admin CRUD functionalities for Products on website
 
@@ -46,9 +46,7 @@ The front-end UI will be developed using a NextJS framework, and all styling wil
 
 This website was developed using [Visual Studio Code](https://code.visualstudio.com/) with Typescript,Prisma extensions. [Postman](https://www.postman.com/) will be used to test all API routes from our application. Stripe services will be used for all transactional based actions. [Github](https://www.github.com/) will be our primary source of code collaboration.
 
-### Theme
 
-We will be choosing a theme for this templated project which will use mock data, for products. We plan on creating a clothing store. 
 
 
 
