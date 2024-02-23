@@ -2,7 +2,7 @@ import { sql } from '@vercel/postgres';
 import { Card, Title, Text } from '@tremor/react';
 import Search from './search';
 import UsersTable from './table';
-
+import TailwindComponent from './TailwindComponent';
 interface User {
   id: number;
   name: string;
@@ -31,12 +31,7 @@ export default async function IndexPage({
       <Card className="mt-6">
         <UsersTable users={users} />
       </Card>
-      <div className="bg-blue-500 p-4 text-white">
-      <div className="container mx-auto">
-        <h1 className="text-3xl font-bold">Tailwind CSS Works!</h1>
-        <p className="mt-2">This is to check if tailwind css works.</p>
-      </div>
-    </div>
+      <TailwindComponent></TailwindComponent>
     </main>
   );
 }
