@@ -3,6 +3,7 @@ import './globals.css';
 import Nav from './nav';
 
 import { Suspense } from 'react';
+import { Toaster } from '@/components/ui/toaster';
 
 export const metadata = {
   title: 'BTS530 eCommerce Manager (Group 17)',
@@ -22,6 +23,7 @@ export default function RootLayout({
           <Nav />
         </Suspense>
         {children}
+        <Toaster />
       </body>
     </html>
   );
