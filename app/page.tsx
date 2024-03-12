@@ -1,3 +1,4 @@
+export const revalidate = 3600;
 import { sql } from '@vercel/postgres';
 import { Card, Title, Text } from '@tremor/react';
 import Search from './search';
@@ -24,10 +25,11 @@ export default async function IndexPage({
   // }
   const search = searchParams.q ?? '';
   const result = await sql`
-    SELECT id, username, email 
+    SELECT *
     FROM users 
     WHERE username ILIKE ${'%' + search + '%'};
   `;
+  console.log(result);
   const users = result.rows as User[];
 
   return (
