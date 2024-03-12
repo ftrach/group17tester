@@ -10,9 +10,9 @@ import {
 
 interface User {
   id: number;
-  name: string;
   username: string;
   email: string;
+  role: string;
 }
 
 export default function UsersTable({ users }: { users: User[] }) {
@@ -20,7 +20,6 @@ export default function UsersTable({ users }: { users: User[] }) {
     <Table>
       <TableHead>
         <TableRow>
-          <TableHeaderCell>Name</TableHeaderCell>
           <TableHeaderCell>Username</TableHeaderCell>
           <TableHeaderCell>Email</TableHeaderCell>
         </TableRow>
@@ -28,7 +27,6 @@ export default function UsersTable({ users }: { users: User[] }) {
       <TableBody>
         {users.map((user) => (
           <TableRow key={user.id}>
-            <TableCell>{user.name}</TableCell>
             <TableCell>
               <Text>{user.username}</Text>
             </TableCell>
