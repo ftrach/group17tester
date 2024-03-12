@@ -3,11 +3,13 @@ import { Card, Title, Text } from '@tremor/react';
 import Search from './search';
 import UsersTable from './table';
 import TailwindComponent from './TailwindComponent';
+import { redirect } from 'next/navigation';
+
 interface User {
   id: number;
-  name: string;
   username: string;
   email: string;
+  role: string;
 }
 
 export default async function IndexPage({
@@ -15,11 +17,16 @@ export default async function IndexPage({
 }: {
   searchParams: { q: string };
 }) {
+  // Logic to determine if a redirect is needed
+  // const accessDenied = true;
+  // if (accessDenied) {
+  //   redirect('/login');
+  // }
   const search = searchParams.q ?? '';
   const result = await sql`
-    SELECT id, name, username, email 
+    SELECT id, username, email 
     FROM users 
-    WHERE name ILIKE ${'%' + search + '%'};
+    WHERE username ILIKE ${'%' + search + '%'};
   `;
   const users = result.rows as User[];
 
