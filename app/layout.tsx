@@ -1,5 +1,5 @@
 import './globals.css';
-
+import { SessionProvider } from 'next-auth/react';
 import Nav from './nav';
 
 import { Suspense } from 'react';
@@ -19,11 +19,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full bg-gray-50">
       <body className="h-full">
-        <Suspense>
-          <Nav />
-        </Suspense>
-        {children}
-        <Toaster />
+        <SessionProvider>
+          <Suspense>
+            <Nav />
+          </Suspense>
+          {children}
+          <Toaster />
+        </SessionProvider>
       </body>
     </html>
   );

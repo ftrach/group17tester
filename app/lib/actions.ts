@@ -1,6 +1,5 @@
 'use server';
 
-import { signIn } from '@/auth';
 import { getSession } from 'next-auth/react';
 import { sql } from '@vercel/postgres';
 import { sendOTPEmail } from '@/lib/otp';
@@ -17,22 +16,22 @@ async function hashPassword(password: string) {
   return bcrypt.hash(password, saltRounds);
 }
 
-export async function authenticate(_currentState: unknown, formData: FormData) {
-  try {
-    //check if password matches from database
-    await signIn('credentials', formData);
-  } catch (error: any) {
-    if (error) {
-      switch (error.type) {
-        case 'CredentialsSignin':
-          return 'Invalid credentials.';
-        default:
-          return 'Something went wrong.';
-      }
-    }
-    throw error;
-  }
-}
+// export async function authenticate(_currentState: unknown, formData: FormData) {
+//   try {
+//     //check if password matches from database
+//     await signIn('credentials', formData);
+//   } catch (error: any) {
+//     if (error) {
+//       switch (error.type) {
+//         case 'CredentialsSignin':
+//           return 'Invalid credentials.';
+//         default:
+//           return 'Something went wrong.';
+//       }
+//     }
+//     throw error;
+//   }
+// }
 
 export async function serverAction() {
   const session = await getSession();
