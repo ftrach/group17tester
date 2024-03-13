@@ -7,7 +7,8 @@ import { Icons } from '@/components/ui/icons';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { createNewUser } from '../lib/actions';
+import { sendOTPEmail } from '@/lib/otp';
+import { useRouter } from 'next/navigation';
 
 interface UserLoginFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -15,20 +16,21 @@ export function UserLoginForm({ className, ...props }: UserLoginFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const router = useRouter();
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
     setIsLoading(true);
-    //TODO: Create entry in database
     console.log(event.target);
     const formData = {
       // Construct formData with email and password
       email: email,
       password: password
     };
-    await createNewUser(formData);
+    const emailResponse = await sendOTPEmail(email);
     setTimeout(() => {
       setIsLoading(false);
+      router.push(`/verify?validate=${email}`);
     }, 3000);
   }
 
@@ -52,7 +54,7 @@ export function UserLoginForm({ className, ...props }: UserLoginFormProps) {
               disabled={isLoading}
             />
           </div>
-          <div className="grid gap-1">
+          {/* <div className="grid gap-1">
             <Label className="sr-only" htmlFor="password">
               Password
             </Label>
@@ -64,12 +66,12 @@ export function UserLoginForm({ className, ...props }: UserLoginFormProps) {
               onChange={(e) => setPassword(e.target.value)} // Update password state on change
               disabled={isLoading}
             />
-          </div>
+          </div> */}
           <Button disabled={isLoading}>
             {isLoading && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
-            Login
+            Send One-time Login code
           </Button>
         </div>
       </form>

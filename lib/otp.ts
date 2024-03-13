@@ -1,8 +1,10 @@
 'use server';
 const { randomBytes } = require('crypto');
-const nodemailer = require('nodemailer');
+import { Resend } from 'resend';
 import { sql } from '@vercel/postgres';
+import type { User } from 'next-auth';
 
+const resend = new Resend(process.env.RESEND_API_KEY);
 function generateOTP() {
   let code: string = '';
   do {
@@ -24,37 +26,58 @@ async function generateAndStoreOTP(email: string) {
 }
 
 export async function sendOTPEmail(email: string) {
-  console.log(process.env.EMAIL);
   let otp = await generateAndStoreOTP(email);
-  let transporter = nodemailer.createTransport({
-    service: 'gmail', // or another email service
-    auth: {
-      user: process.env.EMAIL,
-      pass: process.env.EMAIL_PASS
-    }
+  let data = {
+    email: email,
+    otp: otp
+  };
+  //send the OTP to user email
+  console.log(process.env.URL);
+  const res = await fetch(`http://${process.env.URL}/api/mail`, {
+    method: 'POST', // Specify the method
+    headers: {
+      // Content-Type header tells the server what kind of data is being sent
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data) // Convert the JavaScript object to a JSON string
   });
-
-  let info = await transporter.sendMail({
-    from: `'"ECommerce 17" ${process.env.EMAIL}'`, // sender address
-    to: email, // list of receivers
-    subject: 'Your OTP', // Subject line
-    text: `Your OTP is: ${otp}`, // plain text body
-    html: `<b>Your OTP is: ${otp}</b>` // HTML body content
-  });
-
-  console.log('Message sent: %s', info.messageId);
+  console.log('Message sent!');
   return { otp: otp, message: 'success' };
 }
 
-export async function validateOTP(email: string, otp: string) {
-  const { rows, fields } = await sql`SELECT *
-  FROM otps
-  WHERE email = '${email}'
-    AND otp = '${otp}'
-    AND expires_at > NOW();
-  `;
-  if (rows.length > 0) {
-    return true;
+export async function validateOTP(
+  credentials: Partial<Record<'email' | 'otp', unknown>>
+) {
+  // Validate that email and otp are strings
+  if (
+    typeof credentials.email === 'string' &&
+    typeof credentials.otp === 'string'
+  ) {
+    try {
+      const { rows } = await sql`
+        SELECT * FROM otps
+        WHERE email = ${credentials.email} AND otp = ${credentials.otp} AND used = false AND expires_at > NOW();
+      `;
+
+      console.log(rows);
+
+      if (rows.length > 0) {
+        // OTP is valid, mark otp as used and return user
+        const makeOtpUsed = await sql`
+        UPDATE otps
+        SET used = true
+        WHERE id = ${rows[0].id};
+      `;
+        return rows[0]; // Adjust this return value based on your needs
+      } else {
+        // OTP is invalid or expired
+        return null; // Or throw an error, based on your application logic
+      }
+    } catch (error) {
+      console.error('Error validating OTP:', error);
+      throw new Error('Failed to validate OTP due to an error');
+    }
+  } else {
+    throw new Error('Email and OTP must be provided as strings');
   }
-  return false;
 }
