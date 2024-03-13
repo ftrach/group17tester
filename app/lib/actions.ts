@@ -3,6 +3,7 @@
 import { getSession } from 'next-auth/react';
 import { sql } from '@vercel/postgres';
 import { sendOTPEmail } from '@/lib/otp';
+import { AdapterUser } from 'next-auth/adapters';
 
 interface LoginForm {
   email: string;
@@ -48,21 +49,22 @@ export async function serverAction() {
   // ... implementation of the action
 }
 
-export async function createNewUser(formData: LoginForm) {
-  const username = 'TemporaryName';
-  const password = await hashPassword(formData.password);
-  const { rows, fields } =
-    await sql`INSERT INTO users (email,username,password) VALUES(${formData.email},${username},${password});`;
+export async function createNewUser(email: string) {
+  const username = email.split('@').shift();
+  const name = email.split('@').shift();
+  // const password = await hashPassword(formData.password);
 
-  // // Check if user is authorized to perform the action
-  // if (userRole !== 'admin') {
-  //   throw new Error(
-  //     'Unauthorized access: User does not have admin privileges.'
-  //   );
-  // }
-
-  // Proceed with the action for authorized users
-  // ... implementation of the action
+  const { rows } = await sql`
+    INSERT INTO users (name, email, username) 
+    VALUES (${name}, ${email}, ${username}) 
+    RETURNING id, name, email, email_verified`;
+  const newUser: AdapterUser = {
+    ...rows[0],
+    id: rows[0].id.toString(),
+    emailVerified: rows[0].email_verified,
+    email: rows[0].email
+  };
+  return newUser;
 }
 export async function loginUser(formData: LoginForm) {
   const username = 'TemporaryName';
@@ -70,13 +72,4 @@ export async function loginUser(formData: LoginForm) {
   const { rows, fields } =
     await sql`INSERT INTO users (email,username,password) VALUES(${formData.email},${username},${password});`;
 
-  // // Check if user is authorized to perform the action
-  // if (userRole !== 'admin') {
-  //   throw new Error(
-  //     'Unauthorized access: User does not have admin privileges.'
-  //   );
-  // }
-
-  // Proceed with the action for authorized users
-  // ... implementation of the action
 }

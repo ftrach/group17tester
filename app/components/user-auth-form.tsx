@@ -9,6 +9,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { createNewUser } from '../lib/actions';
 import { sendOTPEmail } from '@/lib/otp';
+import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 interface FormData {
@@ -19,16 +21,19 @@ interface FormData {
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [email, setEmail] = React.useState('');
+  const router = useRouter();
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
     setIsLoading(true);
-    //TODO: Create entry in database
+
     console.log(event.target);
-    const response = await sendOTPEmail(email);
-    // await createNewUser(FormData);
+    const createUserResponse = await createNewUser(email);
+    const emailResponse = await sendOTPEmail(email);
+
     setTimeout(() => {
       setIsLoading(false);
+      router.push(`/verify?validate=${email}`);
     }, 3000);
   }
 
