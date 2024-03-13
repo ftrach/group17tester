@@ -26,14 +26,14 @@ async function generateAndStoreOTP(email: string) {
 }
 
 export async function sendOTPEmail(email: string) {
-  console.log(process.env.EMAIL);
   let otp = await generateAndStoreOTP(email);
   let data = {
     email: email,
     otp: otp
   };
   //send the OTP to user email
-  await fetch(`${process.env.URL}/api/mail`, {
+  console.log(process.env.URL);
+  const res = await fetch(`http://${process.env.URL}/api/mail`, {
     method: 'POST', // Specify the method
     headers: {
       // Content-Type header tells the server what kind of data is being sent
