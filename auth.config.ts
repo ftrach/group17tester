@@ -1,5 +1,5 @@
 import GitHub from 'next-auth/providers/github';
-import Credentials from 'next-auth/providers/Credentials';
+import Credentials from 'next-auth/providers/credentials';
 import { validateOTP } from '@/lib/otp';
 import type { NextAuthConfig } from 'next-auth';
 
