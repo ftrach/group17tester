@@ -4,7 +4,7 @@ const AboutUs = () => {
   return (
     <main className="p-4 md:p-10 mx-auto max-w-7xl">
       <div className="text-center">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Welcome to Group 17</h1>
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Welcome to G17</h1>
         <p className="text-lg text-gray-600 mb-8">
           At Group 17, we&apos;re all about style and technology. <br /> We blend the latest in tech with the trendiest streetwear to create a unique experience for our clients.
         </p>
