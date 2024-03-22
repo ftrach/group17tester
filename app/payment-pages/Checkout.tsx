@@ -24,4 +24,14 @@ const Checkout: React.FC = () => {
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
- 
+    }));
+  };
+
+  return (
+    <div>
+      {/* Your JSX for the form */}
+    </div>
+  );
+};
+
+export default Checkout;

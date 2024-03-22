@@ -1,10 +1,10 @@
 'use server';
 const { randomBytes } = require('crypto');
-// import { Resend } from 'resend';
 import { sql } from '@vercel/postgres';
 import type { User } from 'next-auth';
+import { Resend } from 'resend';
 
-/* const resend = new Resend(process.env.RESEND_API_KEY);
+ // const resend: Resend = new Resend(process.env.RESEND_API_KEY);
 
 
 function generateOTP() {
@@ -18,7 +18,7 @@ function generateOTP() {
 }
 
 
-*/
+
 // Assume a function to store OTP in your database, including the user's email and expiration time
 async function generateAndStoreOTP(email: string) {
   const otp = await generateOTP();
