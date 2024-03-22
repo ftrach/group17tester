@@ -6,6 +6,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { signIn, signOut } from 'next-auth/react';
 import Image from 'next/image';
+import CartDropdown from './CartDropdown'; // Adjust the path as needed
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -19,7 +20,7 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Navbar({ user }: { user: any }) {
+export default function Navbar({ user, cartItems }: { user: any; cartItems: any[] }) {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -159,7 +160,8 @@ export default function Navbar({ user }: { user: any }) {
                       />
                     </div>
                     <div className="ml-3">
-                      <div className="text-base font-medium text-gray-800">
+                      <div className="text-base font-medium
+					  text-gray-800">
                         {user.name}
                       </div>
                       <div className="text-sm font-medium text-gray-500">
@@ -188,6 +190,10 @@ export default function Navbar({ user }: { user: any }) {
               )}
             </div>
           </Disclosure.Panel>
+          
+          {/* Cart Dropdown */}
+          <CartDropdown cartItems={cartItems} />
+
         </>
       )}
     </Disclosure>
