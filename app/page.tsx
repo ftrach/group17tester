@@ -1,4 +1,5 @@
 export const revalidate = 3600;
+import { sql } from '@vercel/postgres';
 // Import necessary modules and components
 import { Card, Title, Text } from '@tremor/react';
 import Search from './search';
@@ -24,16 +25,17 @@ export default async function IndexPage({
   //   redirect('/login');
   // }
   // Commented out PostgreSQL query
-  // const search = searchParams.q ?? '';
-  // const result = await sql`
-  //   SELECT *
-  //   FROM users 
-  //   WHERE username ILIKE ${'%' + search + '%'};
-  // `;
+  const search = searchParams.q ?? '';
+  const result = await sql`
+    SELECT *
+    FROM users 
+    WHERE username ILIKE ${'%' + search + '%'};
+  `;
   // console.log(result); // Commented out console log statement
 
   // Since the PostgreSQL query is commented out, users will be empty for now
-  const users: User[] = [];
+  // const users: User[] = [];
+  const users = result.rows as User[];
 
   return (
     <main className="p-4 md:p-10 mx-auto max-w-7xl">
