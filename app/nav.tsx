@@ -3,5 +3,6 @@ import { auth } from '@/auth';
 
 export default async function Nav() {
   const session = await auth();
-  return <Navbar user={session?.user} />;
+  const cartItems: any[] = []; // Explicitly specify the type as any[]
+  return <Navbar user={session?.user} cartItems={cartItems} />;
 }
