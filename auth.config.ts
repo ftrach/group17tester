@@ -20,7 +20,6 @@ export default {
         try {
           const user = await validateOTP(credentials);
           if (user) {
-            console.log('auth successful');
             return user;
           } else {
             throw new Error('Invalid OTP');
@@ -32,7 +31,14 @@ export default {
     })
   ],
   callbacks: {
-    async session({ session, token, user }) {
+    async jwt({ token, user }) {
+      if (user) {
+        token.user = user;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      //return users in session
       return session;
     }
   }

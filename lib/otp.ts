@@ -69,7 +69,21 @@ export async function validateOTP(
         SET used = true
         WHERE id = ${rows[0].id};
       `;
-        return rows[0]; // Adjust this return value based on your needs
+        //return the user
+        const user = await sql`
+      SELECT *
+      FROM users
+      WHERE email = ${credentials.email};
+      `;
+        console.log(user.rows[0]);
+        //parse query result into a user to return in authorize()
+        const parsedUser: User = {
+          name: user.rows[0].name,
+          email: user.rows[0].email,
+          image: null
+        };
+        return parsedUser;
+        // Adjust this return value based on your needs
       } else {
         // OTP is invalid or expired
         return null; // Or throw an error, based on your application logic

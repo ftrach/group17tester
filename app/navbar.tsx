@@ -11,7 +11,6 @@ import { generateOTP } from './otpGenerator';
 
 // Rest of your code
 
-
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Playground', href: '/playground' },
@@ -26,13 +25,12 @@ function classNames(...classes: string[]) {
 
 interface Props {
   user: any;
-  cartItems?: any[];// Define the type of cartItems here
+  cartItems?: any[]; // Define the type of cartItems here
 }
 
 export default function Navbar({ user, cartItems }: Props) {
   const pathname = usePathname();
   const router = useRouter();
-
   return (
     <Disclosure as="nav" className="bg-white shadow-sm">
       {({ open }) => (
@@ -67,6 +65,7 @@ export default function Navbar({ user, cartItems }: Props) {
                 </div>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:items-center">
+                <span>{user?.email}</span>
                 <Menu as="div" className="relative ml-3">
                   <div>
                     <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2">
@@ -156,7 +155,7 @@ export default function Navbar({ user, cartItems }: Props) {
               ))}
             </div>
             <div className="border-t border-gray-200 pt-4 pb-3">
-              {user ? (
+              {user && user.email ? (
                 <>
                   <div className="flex items-center px-4">
                     <div className="flex-shrink-0">
@@ -169,8 +168,10 @@ export default function Navbar({ user, cartItems }: Props) {
                       />
                     </div>
                     <div className="ml-3">
-                      <div className="text-base font-medium
-                      text-gray-800">
+                      <div
+                        className="text-base font-medium
+                      text-gray-800"
+                      >
                         {user.name}
                       </div>
                       <div className="text-sm font-medium text-gray-500">
@@ -200,11 +201,9 @@ export default function Navbar({ user, cartItems }: Props) {
               )}
             </div>
           </Disclosure.Panel>
-          
+
           {/* Cart Dropdown */}
-		  {cartItems && <CartDropdown items={cartItems} />}
-
-
+          {cartItems && <CartDropdown items={cartItems} />}
         </>
       )}
     </Disclosure>
