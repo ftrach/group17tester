@@ -75,6 +75,7 @@ export async function validateOTP(
       FROM users
       WHERE email = ${credentials.email};
       `;
+        // if user.rows[0] is undefined, then the user does not exist in the database
         console.log(user.rows[0]);
         //parse query result into a user to return in authorize()
         const parsedUser: User = {

@@ -1,5 +1,4 @@
 'use client';
-//
 import { Fragment } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
@@ -8,6 +7,7 @@ import { signIn, signOut } from 'next-auth/react';
 import Image from 'next/image';
 import CartDropdown from './CartDropdown'; // Adjust the path as needed
 import { generateOTP } from './otpGenerator';
+import { useToast } from '@/components/ui/use-toast';
 
 // Rest of your code
 
@@ -24,13 +24,26 @@ function classNames(...classes: string[]) {
 }
 
 interface Props {
-  user: any;
+  session: any;
   cartItems?: any[]; // Define the type of cartItems here
 }
 
-export default function Navbar({ user, cartItems }: Props) {
+export default function Navbar({ session, cartItems }: Props) {
   const pathname = usePathname();
   const router = useRouter();
+  const { toast } = useToast();
+  const handleSignOut = async () => {
+    await signOut();
+
+    window.location.href = '/login'; // Redirect to login page
+    router.refresh();
+
+    toast({
+      title: 'Sign out successful!',
+      description: 'You have been signed out.',
+      variant: 'default'
+    });
+  };
   return (
     <Disclosure as="nav" className="bg-white shadow-sm">
       {({ open }) => (
@@ -65,17 +78,20 @@ export default function Navbar({ user, cartItems }: Props) {
                 </div>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:items-center">
-                <span>{user?.email}</span>
+                <span>{session?.user?.email}</span>
                 <Menu as="div" className="relative ml-3">
                   <div>
                     <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2">
                       <span className="sr-only">Open user menu</span>
                       <Image
                         className="h-8 w-8 rounded-full"
-                        src={user?.image || 'https://avatar.vercel.sh/leerob'}
+                        src={
+                          session?.user?.image ||
+                          'https://avatar.vercel.sh/leerob'
+                        }
                         height={32}
                         width={32}
-                        alt={`${user?.name || 'placeholder'} avatar`}
+                        alt={`${session?.user?.name || 'placeholder'} avatar`}
                       />
                     </Menu.Button>
                   </div>
@@ -89,7 +105,7 @@ export default function Navbar({ user, cartItems }: Props) {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      {user ? (
+                      {session && session.user ? (
                         <Menu.Item>
                           {({ active }) => (
                             <button
@@ -97,7 +113,7 @@ export default function Navbar({ user, cartItems }: Props) {
                                 active ? 'bg-gray-100' : '',
                                 'flex w-full px-4 py-2 text-sm text-gray-700'
                               )}
-                              onClick={() => signOut()}
+                              onClick={() => handleSignOut()}
                             >
                               Sign out
                             </button>
@@ -155,16 +171,16 @@ export default function Navbar({ user, cartItems }: Props) {
               ))}
             </div>
             <div className="border-t border-gray-200 pt-4 pb-3">
-              {user && user.email ? (
+              {session && session.user && session.user.email ? (
                 <>
                   <div className="flex items-center px-4">
                     <div className="flex-shrink-0">
                       <Image
                         className="h-8 w-8 rounded-full"
-                        src={user.image}
+                        src={session?.user?.image}
                         height={32}
                         width={32}
-                        alt={`${user.name} avatar`}
+                        alt={`${session?.user?.name} avatar`}
                       />
                     </div>
                     <div className="ml-3">
@@ -172,10 +188,10 @@ export default function Navbar({ user, cartItems }: Props) {
                         className="text-base font-medium
                       text-gray-800"
                       >
-                        {user.name}
+                        {session?.user?.name}
                       </div>
                       <div className="text-sm font-medium text-gray-500">
-                        {user.email}
+                        {session?.user?.email}
                       </div>
                     </div>
                   </div>
