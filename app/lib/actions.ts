@@ -53,23 +53,31 @@ export async function createNewUser(email: string) {
   const username = email.split('@').shift();
   const name = email.split('@').shift();
   // const password = await hashPassword(formData.password);
+  const userExists = await sql`
+    SELECT EXISTS(SELECT 1 FROM users WHERE email = ${email});`;
 
-  const { rows } = await sql`
+  console.log(userExists.rows[0].exists);
+  //create user if it does not exist
+  if (userExists.rows[0].exists == false) {
+    const { rows } = await sql`
     INSERT INTO users (name, email, username) 
     VALUES (${name}, ${email}, ${username}) 
-    RETURNING id, name, email, email_verified`;
-  const newUser: AdapterUser = {
-    ...rows[0],
-    id: rows[0].id.toString(),
-    emailVerified: rows[0].email_verified,
-    email: rows[0].email
-  };
-  return newUser;
+    RETURNING user_id, name, email, email_verified`;
+    const newUser: AdapterUser = {
+      ...rows[0],
+      id: rows[0].user_id.toString(),
+      emailVerified: rows[0].email_verified,
+      email: rows[0].email
+    };
+    return newUser;
+  } else {
+    return null;
+  }
 }
+
 export async function loginUser(formData: LoginForm) {
   const username = 'TemporaryName';
   const password = await hashPassword(formData.password);
   const { rows, fields } =
     await sql`INSERT INTO users (email,username,password) VALUES(${formData.email},${username},${password});`;
-
 }
