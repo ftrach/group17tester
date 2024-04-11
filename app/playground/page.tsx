@@ -1,7 +1,5 @@
-'use client';
-
 import { Card, Metric, Text, Title, BarList, Flex, Grid } from '@tremor/react';
-import Chart from './chart';
+import RoleList from './role';
 
 const website = [
   { name: '/home', value: 1230 },
@@ -63,17 +61,17 @@ export default function PlaygroundPage() {
               <Text>Pages</Text>
               <Text className="text-right">Views</Text>
             </Flex>
-            <BarList
+            {/* <BarList
               data={item.data}
               valueFormatter={(number: number) =>
                 Intl.NumberFormat('us').format(number).toString()
               }
               className="mt-2"
-            />
+            /> */}
           </Card>
         ))}
       </Grid>
-      <Chart />
+      <RoleList />
     </main>
   );
 }

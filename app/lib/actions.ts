@@ -4,6 +4,7 @@ import { getSession } from 'next-auth/react';
 import { sql } from '@vercel/postgres';
 import { sendOTPEmail } from '@/lib/otp';
 import { AdapterUser } from 'next-auth/adapters';
+import { auth } from '@/auth';
 
 interface LoginForm {
   email: string;
@@ -34,6 +35,20 @@ async function hashPassword(password: string) {
 //   }
 // }
 
+export async function getRole() {
+  'use server';
+  const session = await auth();
+  const id =
+    await sql`SELECT user_id FROM users WHERE email = ${session?.user?.email};`;
+  const user_role =
+    await sql`SELECT role_id FROM user_roles WHERE user_id = ${id.rows[0].user_id};`;
+
+  return user_role.rows[0].role_id;
+}
+export async function getRoleList() {
+  const roles = await sql`SELECT * FROM roles;`;
+  return roles.rows;
+}
 export async function serverAction() {
   const session = await getSession();
   // const userRole = session?.user?.role;
@@ -62,7 +77,12 @@ export async function createNewUser(email: string) {
     const { rows } = await sql`
     INSERT INTO users (name, email, username) 
     VALUES (${name}, ${email}, ${username}) 
-    RETURNING user_id, name, email, email_verified`;
+    RETURNING user_id, name, email, email_verified;`;
+
+    const newUserRole = await sql`
+    INSERT INTO user_roles (user_id, role_id)
+    VALUES (${rows[0].user_id}, 4);`;
+
     const newUser: AdapterUser = {
       ...rows[0],
       id: rows[0].user_id.toString(),
