@@ -47,12 +47,12 @@ export const RoleList = () => {
       {session && session.user && session.user.role === 'Admin' && (
         <div>
           <>
-            {/* {list.map((item: QueryResultRow) => (
+            {list.map((item: QueryResultRow) => (
               <ul key={item.role_id}>
                 <li key={item.role_name}>{item.role_name}</li>
                 <li key={item.role_name}>{item.role_description}</li>
               </ul>
-            ))} */}
+            ))}
           </>
         </div>
       )}
