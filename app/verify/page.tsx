@@ -30,30 +30,38 @@ export default function VerificationPage() {
   async function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
     setIsLoading(true);
-
-    const result = await signIn('credentials', {
-      redirect: false,
-      email: validateEmail,
-      otp: OTP
-    });
-    console.log(result);
-    if (result) {
-      setIsLoading(false);
-      router.push('/dashboard');
-      setTimeout(() => {
-        toast({
-          title: 'Login Successful!',
-          description: 'Friday, February 10, 2023 at 5:57 PM',
-          variant: 'default'
-        });
-        router.refresh();
-      }, 2000);
-    } else {
+    try {
+      const result = await signIn('credentials', {
+        redirect: false,
+        email: validateEmail,
+        otp: OTP
+      });
+      if (result?.error) {
+        throw new Error(result.error);
+      }
+      console.log(result);
+      if (result) {
+        setIsLoading(false);
+        router.push('/dashboard');
+        setTimeout(() => {
+          const now = Date.now();
+          const date = new Date(now);
+          toast({
+            title: 'Login Successful!',
+            description: date.toString(),
+            variant: 'success'
+          });
+          router.refresh();
+        }, 2000);
+      }
+    } catch (e) {
       toast({
         title: 'Invald Code!',
         description: 'Please try again',
-        variant: 'default'
+        variant: 'error'
       });
+      setIsLoading(false);
+      console.log(e);
     }
   }
   return (

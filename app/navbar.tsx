@@ -33,16 +33,7 @@ export default function Navbar({ session, cartItems }: Props) {
   const router = useRouter();
   const { toast } = useToast();
   const handleSignOut = async () => {
-    await signOut();
-
-    window.location.href = '/login'; // Redirect to login page
-    router.refresh();
-
-    toast({
-      title: 'Sign out successful!',
-      description: 'You have been signed out.',
-      variant: 'default'
-    });
+    await signOut({ callbackUrl: '/login?from=navbar' });
   };
   return (
     <Disclosure as="nav" className="bg-white shadow-sm">
