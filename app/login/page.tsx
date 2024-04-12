@@ -13,12 +13,14 @@ export default function AuthenticationPage() {
   const searchParams = useSearchParams();
   const { toast } = useToast();
   useEffect(() => {
-    if (searchParams.toString() === 'from=navbar') {
-      toast({
-        title: 'Sign out successful!',
-        description: 'You have been signed out.',
-        variant: 'success'
-      });
+    if (searchParams) {
+      if (searchParams.toString() === 'from=navbar') {
+        toast({
+          title: 'Sign out successful!',
+          description: 'You have been signed out.',
+          variant: 'success'
+        });
+      }
     }
   }, [searchParams]);
   return (

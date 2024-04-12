@@ -5,7 +5,6 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { signIn, signOut } from 'next-auth/react';
 import Image from 'next/image';
-import CartDropdown from './CartDropdown'; // Adjust the path as needed
 import { generateOTP } from './otpGenerator';
 import { useToast } from '@/components/ui/use-toast';
 
@@ -14,7 +13,7 @@ import { useToast } from '@/components/ui/use-toast';
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Playground', href: '/playground' },
-  { name: 'Products', href: '/products' },
+  { name: 'Products', href: '/productlist' }, // Updated this line as per your local changes
   { name: 'Collections', href: '/collections' },
   { name: 'About Us', href: '/aboutUs' }
 ];
@@ -175,10 +174,7 @@ export default function Navbar({ session, cartItems }: Props) {
                       />
                     </div>
                     <div className="ml-3">
-                      <div
-                        className="text-base font-medium
-                      text-gray-800"
-                      >
+                      <div className="text-base font-medium text-gray-800">
                         {session?.user?.name}
                       </div>
                       <div className="text-sm font-medium text-gray-500">
@@ -189,8 +185,7 @@ export default function Navbar({ session, cartItems }: Props) {
                   <div className="mt-3 space-y-1">
                     <button
                       onClick={() => signOut()}
-                      className="block px-4 py-2 text-base font-medium text-gray
-                      .500 hover:bg-gray-100 hover:text-gray-800"
+                      className="block px-4 py-2 text-base font-medium text-gray.500 hover:bg-gray-100 hover:text-gray-800"
                     >
                       Sign out
                     </button>
@@ -208,9 +203,6 @@ export default function Navbar({ session, cartItems }: Props) {
               )}
             </div>
           </Disclosure.Panel>
-
-          {/* Cart Dropdown */}
-          {cartItems && <CartDropdown items={cartItems} />}
         </>
       )}
     </Disclosure>
