@@ -1,0 +1,511 @@
+[33mcommit cd18e38bad94b523e77346262e9bed0051f02396[m[33m ([m[1;36mHEAD -> [m[1;32mPayment-Workflow-Update[m[33m, [m[1;31morigin/Payment-Workflow-Update[m[33m)[m
+Author: Francis Trach <francis.trach@outlook.com>
+Date:   Fri Apr 5 07:13:32 2024 -0400
+
+    integrated products imported from json file, integrated add to cart buttons on each product, implemented local storage which connects to each product
+
+[33mcommit 417380e6ca68a3bb3694e4fc9f1bc6ab6989b328[m
+Merge: 62a21a6 250940a
+Author: Francis Trach <francis.trach@outlook.com>
+Date:   Mon Mar 25 17:50:04 2024 -0400
+
+    Merge branch 'main' of https://github.com/BTS-2023-2024/Group_17 into Payment-Workflow-Update
+
+[33mcommit 62a21a642e4311eaf4bb1810850764187d6fe0e1[m
+Author: Francis Trach <francis.trach@outlook.com>
+Date:   Mon Mar 25 17:42:42 2024 -0400
+
+    Added localhost/productlist with products and Add to Cart Button
+
+[33mcommit 250940a580929e99dfee37cc2d90345c4be32916[m
+Author: muhammadssharif <123316379+muhammadssharif@users.noreply.github.com>
+Date:   Fri Mar 22 03:46:12 2024 -0400
+
+    smallupdate
+
+[33mcommit 8e42cde4c9f5dcb570273399feb6f7346393a445[m
+Merge: c790417 2b61854
+Author: muhammadssharif <123316379+muhammadssharif@users.noreply.github.com>
+Date:   Fri Mar 22 03:42:51 2024 -0400
+
+    Merge pull request #31 from BTS-2023-2024/aboutUsUpdate
+    
+    updatedAboutUsPage
+
+[33mcommit 2b61854aa9c3f895cafc032ded42a97babddf6fc[m
+Author: Muhammad Sharif <msharif28@myseneca.ca>
+Date:   Fri Mar 22 03:39:55 2024 -0400
+
+    fixed build bug
+
+[33mcommit c369526886f8e77b6928a5700f440e798357c860[m
+Author: Muhammad Sharif <msharif28@myseneca.ca>
+Date:   Fri Mar 22 03:35:12 2024 -0400
+
+    updatedAboutUsPage
+
+[33mcommit c790417d9e60356f6df7fdd8b02f5c106a43634c[m
+Merge: 8e073ec ae016bc
+Author: muhammadssharif <123316379+muhammadssharif@users.noreply.github.com>
+Date:   Fri Mar 22 03:24:25 2024 -0400
+
+    Merge pull request #30 from BTS-2023-2024/navLinks
+    
+    finished static landing pages
+
+[33mcommit ae016bc79983a95a4f0679e3b37dce5b3eb445eb[m
+Author: Hamsharan Mahalingam <hamsharan@gmail.com>
+Date:   Fri Mar 22 03:14:25 2024 -0400
+
+    finished static landing pages
+
+[33mcommit 8e073ecb124791f7954caa0c2dafbb0503b92c94[m
+Merge: c21f722 ec16193
+Author: tselouie <28274608+tselouie@users.noreply.github.com>
+Date:   Fri Mar 22 00:00:54 2024 -0400
+
+    Merge pull request #29 from BTS-2023-2024/francis
+    
+    uncomment views
+
+[33mcommit c21f722ace9024c5b50fee569272ecbd91a72281[m
+Merge: 3743259 1c369a2
+Author: tselouie <28274608+tselouie@users.noreply.github.com>
+Date:   Thu Mar 21 23:57:10 2024 -0400
+
+    Merge pull request #28 from BTS-2023-2024/Payment-Workflow-Update
+    
+    Payment Workflow Update
+
+[33mcommit ec16193d637c71435ac6eb8dd7c7d6d3883c60ac[m[33m ([m[1;31morigin/francis[m[33m)[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Thu Mar 21 23:53:25 2024 -0400
+
+    uncomment views
+
+[33mcommit a9aab0272a00026210b0f471161b2af0c4d96135[m
+Merge: 00a1b6b 1c369a2
+Author: Louie T <tselouie@gmail.com>
+Date:   Thu Mar 21 23:42:00 2024 -0400
+
+    Merge branch 'Payment-Workflow-Update' of https://github.com/BTS-2023-2024/Group_17 into francis
+
+[33mcommit 1c369a26228dfd8a7836d0c5405bf04b3d9dc4ed[m
+Author: Francis Trach <francis.trach@outlook.com>
+Date:   Thu Mar 21 23:06:14 2024 -0400
+
+    Attempt to fix build error
+
+[33mcommit d4ee7bb4e7ce7950a5b6c31d45866f0e5a159ce7[m
+Author: Francis Trach <francis.trach@outlook.com>
+Date:   Thu Mar 21 21:54:45 2024 -0400
+
+    Added Store tab, Cart, and Payment workflow pages
+
+[33mcommit 374325987b1257607782df6c6fc9f9093f15461b[m
+Merge: 6418db0 a9b4609
+Author: tselouie <28274608+tselouie@users.noreply.github.com>
+Date:   Thu Mar 21 19:54:39 2024 -0400
+
+    Merge pull request #22 from BTS-2023-2024/NavBar-Link-Update
+    
+    Navbar Link Completed Issue
+
+[33mcommit 6418db006c95e76da248b00a94321e6185ad471e[m
+Author: tselouie <28274608+tselouie@users.noreply.github.com>
+Date:   Wed Mar 13 20:10:29 2024 -0400
+
+    remove http://
+
+[33mcommit 00a1b6b0637161be6e7a42d86f8083ccb347bcfb[m[33m ([m[1;31morigin/louie[m[33m)[m
+Merge: 6a09dfc dd83b22
+Author: Louie T <tselouie@gmail.com>
+Date:   Wed Mar 13 20:08:15 2024 -0400
+
+    Merge branch 'main' of https://github.com/BTS-2023-2024/Group_17 into louie
+
+[33mcommit 6a09dfc3287c615c4bc6a0c5c083876a4b6d6afb[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Wed Mar 13 20:06:38 2024 -0400
+
+    removed http from beginning of url
+
+[33mcommit dd83b2270c06b6e2ffa1cac042156ad59aff5b6c[m
+Merge: a2adc4d a879c5e
+Author: tselouie <28274608+tselouie@users.noreply.github.com>
+Date:   Wed Mar 13 19:46:52 2024 -0400
+
+    Merge pull request #27 from BTS-2023-2024/louie
+    
+    vercel case sensitive
+
+[33mcommit a879c5e2711b38f80829adaa695275514e267e81[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Wed Mar 13 19:30:56 2024 -0400
+
+    vercel case sensitive
+
+[33mcommit a2adc4d2881b9333ce479566f314ecfbc2a937ce[m
+Merge: cc4cd4f 09fd2db
+Author: tselouie <28274608+tselouie@users.noreply.github.com>
+Date:   Wed Mar 13 18:17:24 2024 -0400
+
+    Merge pull request #26 from BTS-2023-2024/louie
+    
+    Authentication
+
+[33mcommit 09fd2db178ed7bbe76db1360204c47f2515fb6bc[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Wed Mar 13 17:35:59 2024 -0400
+
+    update env formats/keys
+
+[33mcommit 92a7341af924f7ccfcc10ddb1195424a60511828[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Wed Mar 13 17:21:16 2024 -0400
+
+    remove unused import
+
+[33mcommit 82f5d144c6487dc22d238f4f31122caeb68d5de5[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Wed Mar 13 17:19:58 2024 -0400
+
+    removed unused route
+
+[33mcommit 8a3b523df6d985cdad13f92fe17971fae5fd4627[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Wed Mar 13 17:18:13 2024 -0400
+
+    update OTP process
+
+[33mcommit 00261e4fef90bccfe8a22d8e7a47878e8f6309d8[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Wed Mar 13 17:17:49 2024 -0400
+
+    part of auth refactor
+
+[33mcommit 80209d36b5e2c0862816da7917d96d8f1ab06697[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Wed Mar 13 17:17:07 2024 -0400
+
+    add email template
+
+[33mcommit 4a16fdbef36611367cc56c08531bc7a709bcd236[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Wed Mar 13 17:16:32 2024 -0400
+
+    nav has session
+
+[33mcommit ffdccfe98380192b60034bcde0ab73d2d067874a[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Wed Mar 13 17:16:09 2024 -0400
+
+    refactor auth objects
+
+[33mcommit cc4cd4fed0b96bf70a41de97e1323545129989e7[m
+Merge: 1d0e996 3513699
+Author: tselouie <28274608+tselouie@users.noreply.github.com>
+Date:   Tue Mar 12 12:36:02 2024 -0400
+
+    Merge pull request #25 from BTS-2023-2024/louie
+    
+    Louie
+
+[33mcommit 351369991992dccf245a99c791d22f09e61fcabd[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Tue Mar 12 12:33:12 2024 -0400
+
+    revalidate
+
+[33mcommit babf1aab3821655b2c0fad87523ffd592bc1f1fe[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Tue Mar 12 12:20:56 2024 -0400
+
+    update next-auth to v5
+
+[33mcommit 3b81d5c105a3c3861bece9e5f0e3dc33eb88aaa7[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Tue Mar 12 11:23:01 2024 -0400
+
+    add/implement authentication pages
+
+[33mcommit 7023c93e224fee60f89c5a0ebe6dcdee53f44f59[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Tue Mar 12 11:22:46 2024 -0400
+
+    add routing
+
+[33mcommit 8c3c2df798b29fbb78592ec91057fb9024f7327a[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Tue Mar 12 11:22:27 2024 -0400
+
+    change display table
+
+[33mcommit 11bf72132e540d94ebc75906a526c009b18895e5[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Tue Mar 12 11:22:02 2024 -0400
+
+    install packages
+
+[33mcommit b623f692a692d4ac9343a77a4bf8f035e7631ca3[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Tue Mar 12 11:21:36 2024 -0400
+
+    add shadcn setup
+
+[33mcommit 62314877248b26f4b53a1089b3946b68ad03a30e[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Tue Mar 12 11:15:28 2024 -0400
+
+    implement otp functions
+
+[33mcommit cc94a6b2178e82206c6ff3de3a3db028c473c5cc[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Mon Mar 11 19:01:29 2024 -0400
+
+    commented until session implementation
+
+[33mcommit eae90ff552ac08cb92b8e328015ef012e057caa7[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Mon Mar 11 19:01:00 2024 -0400
+
+    install shadcn
+
+[33mcommit 8182ebd244aeefb2b83fddf510f6eedfe6daf5e7[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Mon Mar 11 17:28:40 2024 -0400
+
+    new variables for nodemailer
+
+[33mcommit a9b4609b58a9320cd419f07c986a250d84ef6e48[m
+Author: muhammadssharif <msharif28@myseneca.ca>
+Date:   Mon Mar 11 14:57:49 2024 -0400
+
+    Completed Issue
+
+[33mcommit 57e931491aabbd8c1dc079012a66384979e9acbc[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Sat Mar 9 21:18:58 2024 -0500
+
+    merge tailwind files
+
+[33mcommit 3af8ee6dcc2960c46acfe943c192ed29db3a09d4[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Sat Mar 9 20:59:33 2024 -0500
+
+    setup shadcn
+
+[33mcommit 1d0e9967302f6264bf5894d1934a4b73be9d3a97[m
+Merge: 0534d17 dbdb220
+Author: Daniil Sen <53953762+Daniil-Sen@users.noreply.github.com>
+Date:   Fri Feb 23 10:05:11 2024 -0500
+
+    Merge pull request #18 from BTS-2023-2024/daniilsen
+    
+    Tailwind CSS
+
+[33mcommit dbdb220b070ec32f5fe5f754bd7426e00fdd8f1e[m[33m ([m[1;31morigin/daniilsen[m[33m)[m
+Author: Daniil-Sen <daniil.sen@live.com>
+Date:   Fri Feb 23 10:01:33 2024 -0500
+
+    Added tailwind.
+    
+    Added tailwind test with custom color and component.
+
+[33mcommit 013501aa76132acd28b97a1526a2427493f987dc[m
+Author: Daniil-Sen <daniil.sen@live.com>
+Date:   Fri Feb 23 09:51:50 2024 -0500
+
+    Added tailwindcss code
+    
+    I added tailwindcss tsx code to see if tailwind works. It does.
+
+[33mcommit 0534d172f3c0701da5ed7705b7811d5873d8d277[m
+Merge: 2b9a5a4 2d6e2c0
+Author: tselouie <28274608+tselouie@users.noreply.github.com>
+Date:   Sun Feb 18 12:32:22 2024 -0500
+
+    Merge pull request #17 from BTS-2023-2024/dev
+    
+    Dev
+
+[33mcommit 2d6e2c0138b995454b2b5cc912756ff420e3fe20[m[33m ([m[1;31morigin/dev[m[33m)[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Fri Feb 9 16:56:16 2024 -0500
+
+    fix build error
+
+[33mcommit 4b6cb86e8fe5dd0a0dc9d71806d9a97e34b21c1c[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Fri Feb 9 16:55:09 2024 -0500
+
+    remove pnpm lock
+
+[33mcommit 348b5b9b848b162b9d44512e09a286c7bbc449c9[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Fri Feb 9 11:39:08 2024 -0500
+
+    remove readme
+
+[33mcommit 0aec5341f546165f4e81859750ab6e1f05600df0[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Fri Feb 9 11:36:20 2024 -0500
+
+    Install packages
+
+[33mcommit e379919dde85649b977d246f337c9aaee670e879[m
+Author: Louie T <tselouie@gmail.com>
+Date:   Fri Feb 9 11:01:00 2024 -0500
+
+    initial commit
+
+[33mcommit 2b9a5a4d29230f97d0a7029e061047290806a0f1[m
+Merge: 9e34399 7fba145
+Author: tselouie <28274608+tselouie@users.noreply.github.com>
+Date:   Fri Feb 9 09:56:26 2024 -0500
+
+    Merge pull request #14 from BTS-2023-2024/readMeProjectDescUpdate
+    
+    theme updated in description
+
+[33mcommit 7fba14563428e8d274b9b9e6a0c7463a2f341b48[m
+Author: Hamsharan Mahalingam <hamsharan@gmail.com>
+Date:   Wed Feb 7 21:36:28 2024 -0500
+
+    theme updated in description
+
+[33mcommit 9e34399f3c1d723c693d0bf16c204a52df12399b[m
+Merge: ed90726 7bdcac3
+Author: Daniil Sen <53953762+Daniil-Sen@users.noreply.github.com>
+Date:   Tue Feb 6 21:25:20 2024 -0500
+
+    Merge pull request #10 from BTS-2023-2024/daniilsen
+    
+    Fixed grammar.
+
+[33mcommit 7bdcac33443a6d82969b5dcbc631aab5bc2bb507[m
+Author: Daniil-Sen <daniil.sen@live.com>
+Date:   Tue Feb 6 21:23:44 2024 -0500
+
+    Fixed grammar.
+
+[33mcommit ed90726e2333c00fadff4862e0ed2933c8d1442a[m
+Merge: 4466219 61950c8
+Author: Daniil Sen <53953762+Daniil-Sen@users.noreply.github.com>
+Date:   Tue Feb 6 21:20:15 2024 -0500
+
+    Merge pull request #8 from BTS-2023-2024/daniilsen
+    
+    Updated dod.md
+
+[33mcommit 61950c8942fa55c7363d906b99fd495d93dabc64[m
+Author: Daniil-Sen <daniil.sen@live.com>
+Date:   Tue Feb 6 21:19:28 2024 -0500
+
+    Updated dod.md
+
+[33mcommit 4466219fc3dc2d2a368170d33115fe15b6151df7[m
+Merge: 851462f 1a97353
+Author: tselouie <28274608+tselouie@users.noreply.github.com>
+Date:   Fri Feb 2 11:17:44 2024 -0500
+
+    Merge pull request #7 from BTS-2023-2024/update/readme
+    
+    Update wa.md with guidelines
+
+[33mcommit 1a97353765af2dcec02622935d719a9172c2b56d[m
+Author: tselouie <28274608+tselouie@users.noreply.github.com>
+Date:   Fri Feb 2 11:17:00 2024 -0500
+
+    Update wa.md with guidelines
+
+[33mcommit 851462f303aec455736ffe6adecaea1e96757a0c[m
+Author: tselouie <28274608+tselouie@users.noreply.github.com>
+Date:   Fri Jan 26 09:47:53 2024 -0500
+
+    update github name
+
+[33mcommit ff8e608c027b4faa7d7b49c622230e34c865ddcb[m
+Author: ftrach <50428989+ftrach@users.noreply.github.com>
+Date:   Thu Jan 25 18:44:04 2024 -0500
+
+    Update wa.md
+
+[33mcommit d3095fcaf89e9001a4c72a7afd397a009c49187e[m
+Merge: 7b6faef 1de7fad
+Author: Daniil Sen <53953762+Daniil-Sen@users.noreply.github.com>
+Date:   Sat Jan 20 17:05:46 2024 -0500
+
+    Merge pull request #6 from BTS-2023-2024/daniilsen
+    
+    Updated wa.md
+
+[33mcommit 1de7fad64cd7aa727e18e7d246b0ae002e7bcf10[m
+Author: Daniil-Sen <daniil.sen@live.com>
+Date:   Sat Jan 20 17:03:59 2024 -0500
+
+    Updated wa.md with signature
+    
+    wa.md was updated with a signature from Daniil.
+
+[33mcommit 7b6faef377b1a4e8c46d495a562bb882cc89b51a[m
+Author: tselouie <28274608+tselouie@users.noreply.github.com>
+Date:   Sat Jan 20 11:18:33 2024 -0500
+
+    Fix markdown/grammatical errors
+
+[33mcommit b57ae1cb1ea4516a397af31139f8a4eebe05bd9a[m
+Merge: 54cada3 13d48ed
+Author: tselouie <28274608+tselouie@users.noreply.github.com>
+Date:   Sat Jan 20 10:49:56 2024 -0500
+
+    Merge pull request #4 from BTS-2023-2024/waMuhammadSharif
+    
+    signed wa
+
+[33mcommit 54cada3d9361a51695990170607ebcff349157a2[m
+Merge: 9ed484b 729b465
+Author: tselouie <28274608+tselouie@users.noreply.github.com>
+Date:   Sat Jan 20 10:49:38 2024 -0500
+
+    Merge pull request #5 from BTS-2023-2024/readMeUpdate
+    
+    readMeUpdate
+
+[33mcommit 729b465bf6f570624e49317ea9e7270d2dfb08f1[m
+Author: muhammadssharif <msharif28@myseneca.ca>
+Date:   Fri Jan 19 22:56:49 2024 -0500
+
+    readMeUpdate
+
+[33mcommit 13d48ed1b0f1279b91ed0db0538afecc524905ac[m
+Author: muhammadssharif <msharif28@myseneca.ca>
+Date:   Fri Jan 19 22:51:54 2024 -0500
+
+    signed wa
+
+[33mcommit 9ed484b8b9597b4ed99d00c7d0f62186bf0498d5[m
+Author: Daniil Sen <53953762+Daniil-Sen@users.noreply.github.com>
+Date:   Fri Jan 19 14:48:45 2024 -0500
+
+    Create dod.md
+
+[33mcommit 940b5614dd829664afbefd2135b8763528a34564[m
+Author: tselouie <28274608+tselouie@users.noreply.github.com>
+Date:   Tue Jan 16 11:17:29 2024 -0500
+
+    Create wa.md
+    
+    Initial documentation for working agreement
+
+[33mcommit 82c6765184c1e506a325688c3f99ec1d79890f83[m
+Author: ftrach <50428989+ftrach@users.noreply.github.com>
+Date:   Sun Jan 14 11:30:50 2024 -0500
+
+    Update README.md
+
+[33mcommit 48392e29efc9bdd70ba4a6d78749df3c5159b4ee[m
+Author: Marcel Jar <marcel.jar@senecacollege.ca>
+Date:   Thu Jan 11 10:28:19 2024 -0500
+
+    Initial commit

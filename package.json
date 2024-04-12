@@ -52,5 +52,13 @@
     "@types/node": "20.11.20",
     "@types/react": "18.2.58",
     "typescript": "5.3.3"
-  }
+  },
+  "name": "paymentworkflow",
+  "description": "| Name        |   Role |     Github    | Email       |\r | ----------- | --------- | --------- | --------------------------- |\r | Louie Tse | Full Stack Developer | tselouie| lttse@myseneca.ca |\r | Muhammad Sharif  | Full Stack Developer  | muhammadssharif | msharif28@myseneca.ca |\r | Daniil Sen  | Full Stack Developer | Daniil-Sen | dsen5@myseneca.ca |\r | Francis Trach  |  Full Stack Developer | ftrach | ftrach@myseneca.ca |",
+  "version": "1.0.0",
+  "main": "next.config.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "author": ""
 }

@@ -21,7 +21,9 @@ export default function VerificationPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { toast } = useToast();
-
+  if (!searchParams) {
+    return;
+  }
   const validateEmail = searchParams.get('validate');
 
   const handleOtpChange = (newOtpValue: any) => {
