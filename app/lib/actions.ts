@@ -51,10 +51,9 @@ export async function getRoleList() {
 }
 
 export async function getProductList() {
-  const roles = await sql`SELECT * FROM productstb;`;
-  return roles.rows;
+  const products = await sql`SELECT * FROM productstb;`;
+  return products.rows;
 }
-
 export async function serverAction() {
   const session = await getSession();
   // const userRole = session?.user?.role;

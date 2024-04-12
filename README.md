@@ -32,15 +32,14 @@ This will  organise all the orders and payments to be able to keep track of ever
 ## Tech Stack
 
 ### Back-End
- PostgreSQL, Prisma ORM with Firebase, Express 
-
-The back-end will use a cloud-based PostgreSQL database from [Firebase](https://firebase.google.com/). Data will then be fetched in an intuitive way using [Prisma](https://prisma.io/).
-Firebase also has it'/s own NoSql database called Firestore which may be used to run the entire application. 
-
+PostgreSQL hosted by VercelDB 
+The back-end will use a cloud-based PostgreSQL database from [VercelDB](https://vercel.com/guides/using-databases-with-vercel)/). Data will then be fetched seamlessly from our vercel db. 
 ### Front-End
-
 NextJS, React, TailwindCSS
 The front-end UI will be developed using a NextJS framework, and all styling will be using [TailwindCSS](https://tailwindcss.com/) to develop the main interface. The template websites will have their css stored separately and themes will be held via a json file.
+
+### Hosting & CI/CD
+Hosting of the database and the NextJS app are hosted on vercel allowing unity within the application. As we push items to the repository it will automatically deploy onto vercel having a very smooth transition from development to production.
 
 ### Developing Tools
 
