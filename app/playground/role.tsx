@@ -1,15 +1,9 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { getRole, getRoleList } from '../lib/actions'; // Replace with your actual import
+import { getRole, getRoleList, getProductList } from '../lib/actions'; // Replace with your actual import
 import { QueryResultRow } from '@vercel/postgres';
 import { useSession } from 'next-auth/react';
-const role_list = [
-  { name: '/home', value: 1230 },
-  { name: '/contact', value: 751 },
-  { name: '/gallery', value: 471 },
-  { name: '/august-discount-offer', value: 280 },
-  { name: '/case-studies', value: 78 }
-];
+
 interface User {
   id?: string;
   name?: string | null;
@@ -23,18 +17,23 @@ export const RoleList = () => {
   // const [role, setRole] = useState(null);
 
   const [list, setList] = useState<QueryResultRow[]>([]);
+  const [productList, setProductList] = useState<QueryResultRow[]>([]);
 
   useEffect(() => {
-    // async function fetchRole() {
-    //   //fetch the role list from the role table
-    //   if (session?.user?.role === 'Admin') {
-    //     const roleList = await getRoleList();
-    //     setList(roleList); // Replace role_list with your actual list
-    //   }
-    // }
+    async function fetchRole() {
+      //fetch the role list from the role table
+      if (session?.user?.role === 'Admin') {
+        const roleList = await getRoleList();
+
+        setList(roleList); // Replace role_list with your actual list
+      }
+      const productList = await getProductList();
+      console.log(productList);
+      setProductList(productList);
+    }
     if (session) {
       console.log(session);
-      // fetchRole();
+      fetchRole();
     }
   }, [session]);
 
