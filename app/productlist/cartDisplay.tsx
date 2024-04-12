@@ -14,7 +14,7 @@ const CartDisplay = () => {
       <ul className="my-2">
         {items.map((item, index) => (
           <li key={index} className="border-b last:border-b-0 py-2">
-            {item.name} - ${item.price}
+            {item.product_name} - ${item.product_price.toFixed(2)} {/* Assuming product_price is a number and you want to format it as a currency */}
           </li>
         ))}
       </ul>

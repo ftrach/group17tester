@@ -1,17 +1,19 @@
-import React from 'react';
-import { useCart } from './cartContext';
+import React, { useContext } from 'react';
+import { CartContext } from './cartContext';
 
 const CartSummary = () => {
-  const { items } = useCart();
+  const { items } = useContext(CartContext) || { items: [] }; // Use context or default value
 
   return (
     <div>
-      <h2>Cart Summary</h2>
-      <ul>
-        {items.map((item) => (
-          <li key={item.id}>{item.name} - ${item.price}</li>
-        ))}
-      </ul>
+      {items.map(item => (
+        <div key={item.p_id}>
+          <h3>{item.product_name}</h3>
+          <p>{item.product_description}</p>
+          <p>${item.product_price}</p>
+          {/* Render additional properties as needed */}
+        </div>
+      ))}
     </div>
   );
 };

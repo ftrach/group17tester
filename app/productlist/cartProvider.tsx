@@ -23,10 +23,11 @@ const CartProvider: FC<CartProviderProps> = ({ children }) => {
   }, [items]);
 
   const addItem = (item: Product) => setItems(currentItems => [...currentItems, item]);
-  const removeItem = (itemId: string) => setItems(currentItems => currentItems.filter(item => item.id !== itemId));
+  const removeItem = (p_id: number) => setItems(currentItems => currentItems.filter(item => item.p_id !== p_id));
+  const itemCount = items.length; // Calculate item count
 
   return (
-    <CartContext.Provider value={{ items, addItem, removeItem }}>
+    <CartContext.Provider value={{ items, addItem, removeItem, itemCount }}>
       {children}
     </CartContext.Provider>
   );
