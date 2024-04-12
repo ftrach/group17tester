@@ -13,8 +13,7 @@ import { useToast } from '@/components/ui/use-toast';
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Playground', href: '/playground' },
-  { name: 'Products', href: '/productlist' }, // Updated this line as per your local changes
-  { name: 'Products (M-Sharif)', href: '/products' }, // Updated this line as per your local changes
+  { name: 'Products', href: '/products' }, // Updated this line as per your local changes
   { name: 'Collections', href: '/collections' },
   { name: 'About Us', href: '/aboutUs' }
 ];
