@@ -86,7 +86,11 @@ const config = {
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))'
-        }
+        },
+        success: '#28A745',
+        error: '#DC3545',
+        warning: '#FFC107',
+        info: '#17A2B8'
       },
       boxShadow: {
         // light

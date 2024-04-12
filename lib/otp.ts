@@ -77,6 +77,9 @@ export async function validateOTP(
       `;
         // if user.rows[0] is undefined, then the user does not exist in the database
         console.log(user.rows[0]);
+        if (user.rows[0] === undefined) {
+          throw new Error('User does not exist');
+        }
         //parse query result into a user to return in authorize()
         const parsedUser: User = {
           name: user.rows[0].name,

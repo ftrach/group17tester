@@ -1,16 +1,28 @@
+'use client';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { cn } from '@/app/lib/utils';
 import { UserLoginForm } from '@/app/components/user-login-form';
-
-export const metadata: Metadata = {
-  title: 'Authentication',
-  description: 'Authentication forms built using the components.'
-};
+import { useToast } from '@/components/ui/use-toast';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function AuthenticationPage() {
+  const searchParams = useSearchParams();
+  const { toast } = useToast();
+  useEffect(() => {
+    if (searchParams) {
+      if (searchParams.toString() === 'from=navbar') {
+        toast({
+          title: 'Sign out successful!',
+          description: 'You have been signed out.',
+          variant: 'success'
+        });
+      }
+    }
+  }, [searchParams]);
   return (
     <>
       <div className="md:hidden">
