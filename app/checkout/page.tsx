@@ -22,7 +22,10 @@ const CheckoutPage: React.FC = () => {
       const loadedCart = localStorage.getItem('cart');
       if (loadedCart) {
         const parsedCart: CartItem[] = JSON.parse(loadedCart);
-        if (!Array.isArray(parsedCart) || parsedCart.some(item => typeof item.p_id !== 'number' || typeof item.price !== 'number' || typeof item.quantity !== 'number')) {
+        if (!Array.isArray(parsedCart)) {
+          throw new Error("Cart data is not an array");
+        }
+        if (parsedCart.some(item => typeof item.p_id !== 'number' || typeof item.name !== 'string' || typeof item.price !== 'number' || typeof item.quantity !== 'number')) {
           throw new Error("Invalid cart data format");
         }
         setCartItems(parsedCart);
