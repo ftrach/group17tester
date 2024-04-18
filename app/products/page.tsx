@@ -1,4 +1,3 @@
-// app/products/page.tsx
 'use client';
 import React, { useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
@@ -28,13 +27,7 @@ type Product = {
 
 const Products = () => {
   const [productList, setProductList] = useState<Product[]>([]);
-  const [cart, setCart] = useState<any[]>([]);  // Use any type temporarily to avoid TS errors
-
-  useEffect(() => {
-    const localData = typeof window !== 'undefined' ? localStorage.getItem('cart') : null;
-    const cartItems = localData ? JSON.parse(localData) : [];
-    setCart(cartItems);
-  }, []);
+  const [cart, setCart] = useState<any[]>([]);
 
   useEffect(() => {
     async function fetchProduct() {
@@ -42,6 +35,12 @@ const Products = () => {
       setProductList(productList as Product[]);
     }
     fetchProduct();
+  }, []);
+
+  useEffect(() => {
+    const localData = typeof window !== 'undefined' ? localStorage.getItem('cart') : null;
+    const cartItems = localData ? JSON.parse(localData) : [];
+    setCart(cartItems);
   }, []);
 
   useEffect(() => {
@@ -53,22 +52,19 @@ const Products = () => {
   const addToCart = (product: Product) => {
     const newItem = {
       p_id: product.p_id,
-      name: product.product_name,
-      price: product.product_price,
+      product_name: product.product_name,
+      product_price: product.product_price,
       quantity: 1
     };
 
     const existingIndex = cart.findIndex((item: any) => item.p_id === newItem.p_id);
     if (existingIndex !== -1) {
-      const newCart = [...cart];
-      newCart[existingIndex].quantity += 1;
-      setCart(newCart);
+      cart[existingIndex].quantity += 1;
     } else {
-      setCart([...cart, newItem]);
+      cart.push(newItem);
     }
+    setCart([...cart]);
   };
-
-  const totalItemsInCart = cart.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <>
@@ -77,20 +73,15 @@ const Products = () => {
         <div className="relative">
           <Image src="/shoppingcart.png" alt="Cart" width={50} height={50} />
           <span className="absolute top-0 right-0 bg-red-600 text-white rounded-full text-sm px-2">
-            {totalItemsInCart}
+            {cart.reduce((total, item) => total + item.quantity, 0)}
           </span>
         </div>
       </header>
       <main className="p-4 md:p-10 mx-auto max-w-7xl">
-        <div>
-          <h2>Products</h2>
-          <p>This is the products page.</p>
-          <br />
-          <div className="flex flex-wrap justify-center gap-4">
-            {productList.map((product) => (
-              <ProductCard key={product.p_id} product={product} onAddToCart={() => addToCart(product)} />
-            ))}
-          </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+          {productList.map((product) => (
+            <ProductCard key={product.p_id} product={product} onAddToCart={() => addToCart(product)} />
+          ))}
         </div>
       </main>
     </>
