@@ -8,7 +8,7 @@ type Product = {
     p_id: number;
     product_name: string;
     product_description: string;
-    product_price: string; // Received as a string
+    product_price: string; // Received as a string from data sources
     product_quantity: number;
     product_quantity_small: number;
     product_quantity_medium: number;
@@ -28,7 +28,7 @@ type Product = {
 type CartItem = {
     p_id: number;
     product_name: string;
-    product_price: number; // Stored as a number
+    product_price: number; // Stored as a number in the cart
     quantity: number;
 };
 
@@ -49,7 +49,7 @@ const Products = () => {
         if (localData) {
             const cartItems: CartItem[] = JSON.parse(localData).map((item: any) => ({
                 ...item,
-                product_price: Number(item.product_price)
+                product_price: Number(item.product_price) // Ensure conversion to number
             }));
             setCart(cartItems);
         }
@@ -65,8 +65,8 @@ const Products = () => {
         const newItem: CartItem = {
             p_id: product.p_id,
             product_name: product.product_name,
-            product_price: Number(product.product_price),
-            quantity: 1
+            product_price: parseFloat(product.product_price), // Convert to number immediately
+            quantity: 1 // Initialize quantity
         };
 
         const existingIndex = cart.findIndex((item) => item.p_id === newItem.p_id);
@@ -89,12 +89,10 @@ const Products = () => {
                     </span>
                 </div>
             </header>
-            <main className="p-4 md:p-10 mx-auto max-w-7xl">
-                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
-                    {productList.map((product) => (
-                        <ProductCard key={product.p_id} product={product} onAddToCart={() => addToCart(product)} />
-                    ))}
-                </div>
+            <main className="p-4 md:p-10 mx-auto max-w-7xl" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+                {productList.map((product) => (
+                    <ProductCard key={product.p_id} product={product} onAddToCart={() => addToCart(product)} />
+                ))}
             </main>
         </>
     );
