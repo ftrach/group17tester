@@ -83,22 +83,22 @@ const Products = () => {
     };
 
     return (
-        <>
-            <header className="flex justify-between items-center p-4">
-                <div> {/* Placeholder for your site's logo or name here */} </div>
-                <div className="relative" onClick={handleCartClick}>
-                    <Image src="/shoppingcart.png" alt="Cart" width={50} height={50} />
-                    <span className="absolute top-0 right-0 bg-red-600 text-white rounded-full text-sm px-2">
-                        {cart.reduce((total, item) => total + item.quantity, 0)}
-                    </span>
-                </div>
-            </header>
-            <main className="p-4 md:p-10 mx-auto max-w-7xl" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
-                {productList.map((product) => (
-                    <ProductCard key={product.p_id} product={product} onAddToCart={() => addToCart(product)} />
-                ))}
-            </main>
-        </>
+<>
+    <header className="flex justify-between items-center p-4">
+        <div> {/* Placeholder for your site's logo or name here */} </div>
+        <div className="relative" onClick={handleCartClick} style={{ cursor: 'pointer' }}>
+            <Image src="/shoppingcart.png" alt="Cart" width={50} height={50} />
+            <span className="absolute top-0 right-0 bg-red-600 text-white rounded-full text-sm px-2">
+                {cart.reduce((total, item) => total + item.quantity, 0)}
+            </span>
+        </div>
+    </header>
+    <main className="p-4 md:p-10 mx-auto max-w-7xl" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+        {productList.map((product) => (
+            <ProductCard key={product.p_id} product={product} onAddToCart={() => addToCart(product)} />
+        ))}
+    </main>
+</>
     );
 };
 
