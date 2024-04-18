@@ -8,7 +8,7 @@ type Product = {
     p_id: number;
     product_name: string;
     product_description: string;
-    product_price: string; // Assuming price might be received as a string from external data sources
+    product_price: string; // Received as a string
     product_quantity: number;
     product_quantity_small: number;
     product_quantity_medium: number;
@@ -28,7 +28,7 @@ type Product = {
 type CartItem = {
     p_id: number;
     product_name: string;
-    product_price: number; // Making sure product_price is a number
+    product_price: number; // Stored as a number
     quantity: number;
 };
 
@@ -49,7 +49,7 @@ const Products = () => {
         if (localData) {
             const cartItems: CartItem[] = JSON.parse(localData).map((item: any) => ({
                 ...item,
-                product_price: Number(item.product_price) // Ensure conversion to number
+                product_price: Number(item.product_price)
             }));
             setCart(cartItems);
         }
@@ -65,23 +65,23 @@ const Products = () => {
         const newItem: CartItem = {
             p_id: product.p_id,
             product_name: product.product_name,
-            product_price: Number(product.product_price), // Convert to number immediately
-            quantity: 1  // Initialize quantity
+            product_price: Number(product.product_price),
+            quantity: 1
         };
 
         const existingIndex = cart.findIndex((item) => item.p_id === newItem.p_id);
         if (existingIndex !== -1) {
-            cart[existingIndex].quantity += 1; // Increment the quantity
+            cart[existingIndex].quantity += 1;
         } else {
-            cart.push(newItem); // Add new item to the cart
+            cart.push(newItem);
         }
-        setCart([...cart]); // Update state to trigger re-render
+        setCart([...cart]);
     };
 
     return (
         <>
             <header className="flex justify-between items-center p-4">
-                <div> {/* Your site's logo or name here */} </div>
+                <div> {/* Placeholder for your site's logo or name here */} </div>
                 <div className="relative">
                     <Image src="/shoppingcart.png" alt="Cart" width={50} height={50} />
                     <span className="absolute top-0 right-0 bg-red-600 text-white rounded-full text-sm px-2">

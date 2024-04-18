@@ -23,26 +23,14 @@ const CheckoutPage: React.FC = () => {
         throw new Error("No cart items found.");
       }
 
-      const parsedCart = JSON.parse(loadedCart);
+      const parsedCart: CartItem[] = JSON.parse(loadedCart);
       if (!Array.isArray(parsedCart)) {
         throw new Error("Cart data should be an array.");
       }
 
       parsedCart.forEach((item, index) => {
-        if (typeof item !== 'object') {
-          throw new Error(`Item at index ${index} is not an object.`);
-        }
-        if (typeof item.p_id !== 'number') {
-          throw new Error(`Item at index ${index} has invalid 'p_id': ${item.p_id}.`);
-        }
-        if (typeof item.product_name !== 'string') {
-          throw new Error(`Item at index ${index} has invalid 'product_name': ${item.product_name}.`);
-        }
         if (typeof item.product_price !== 'number') {
           throw new Error(`Item at index ${index} has invalid 'product_price': ${item.product_price}.`);
-        }
-        if (typeof item.quantity !== 'number') {
-          throw new Error(`Item at index ${index} has invalid 'quantity': ${item.quantity}.`);
         }
       });
 
@@ -63,7 +51,7 @@ const CheckoutPage: React.FC = () => {
     const updatedCart = cartItems.filter(item => item.p_id !== p_id);
     setCartItems(updatedCart);
     calculateTotal(updatedCart);
-    localStorage.setItem('cart', JSON.stringify(updatedCart)); // Update localStorage
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
 
   return (
