@@ -17,36 +17,38 @@ const CheckoutPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    // Load cart data from localStorage and validate
     try {
       const loadedCart = localStorage.getItem('cart');
-      if (loadedCart) {
-        const parsedCart: CartItem[] = JSON.parse(loadedCart);
-        // Ensure that each cart item has all necessary properties with correct types
-        if (!Array.isArray(parsedCart) || !parsedCart.every(item => 
-            typeof item === 'object' &&
-            typeof item.p_id === 'number' &&
-            typeof item.product_name === 'string' &&
-            typeof item.product_price === 'number' &&
-            typeof item.quantity === 'number')) {
-          throw new Error("Invalid cart data format");
-        }
-        setCartItems(parsedCart);
-        calculateTotal(parsedCart);
-      } else {
+      if (!loadedCart) {
         throw new Error("No cart items found");
       }
+
+      const parsedCart: CartItem[] = JSON.parse(loadedCart);
+      if (!parsedCart.every(item => 
+          item.hasOwnProperty('p_id') && typeof item.p_id === 'number' &&
+          item.hasOwnProperty('product_name') && typeof item.product_name === 'string' &&
+          item.hasOwnProperty('product_price') && typeof item.product_price === 'number' &&
+          item.hasOwnProperty('quantity') && typeof item.quantity === 'number'
+        )) {
+        throw new Error("Invalid cart data format");
+      }
+      
+      setCartItems(parsedCart);
+      calculateTotal(parsedCart);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "An unexpected error occurred");
+      setError(e instanceof Error ? e.message : "Failed to load cart data");
     }
   }, []);
 
-  const calculateTotal = (items: CartItem[]) => {
-    const subtotal = items.reduce((sum, item) => sum + (item.product_price * item.quantity), 0);
-    const taxRate = 0.1; // Assuming a tax rate of 10%
-    const totalWithTax = subtotal + (subtotal * taxRate);
-    setTotal(totalWithTax);
+  // Calculate total price including taxes
+  const calculateTotal = (cartItems: CartItem[]) => {
+    const subtotal = cartItems.reduce((total, item) => total + item.product_price * item.quantity, 0);
+    const taxRate = 0.1; // Assuming tax rate is 10%
+    setTotal(subtotal + subtotal * taxRate);
   };
 
+  // Handle item removal from cart
   const handleRemove = (p_id: number) => {
     const updatedCart = cartItems.filter(item => item.p_id !== p_id);
     setCartItems(updatedCart);
@@ -73,7 +75,7 @@ const CheckoutPage: React.FC = () => {
                 </li>
               ))}
             </ul>
-            <p className="text-lg font-bold mb-4">Total (incl. taxes): ${total.toFixed(2)}</p>
+            <p className="text-lg font-bold">Total (incl. taxes): ${total.toFixed(2)}</p>
             <CheckoutForm />
           </>
         )}
