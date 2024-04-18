@@ -65,8 +65,8 @@ const Products = () => {
         const newItem: CartItem = {
             p_id: product.p_id,
             product_name: product.product_name,
-            product_price: parseFloat(product.product_price), // Convert to number immediately
-            quantity: 1 // Initialize quantity
+            product_price: parseFloat(product.product_price),
+            quantity: 1
         };
 
         const existingIndex = cart.findIndex((item) => item.p_id === newItem.p_id);
@@ -78,11 +78,15 @@ const Products = () => {
         setCart([...cart]);
     };
 
+    const handleCartClick = () => {
+        window.location.href = '/checkout'; // Change this URL to your checkout page's route
+    };
+
     return (
         <>
             <header className="flex justify-between items-center p-4">
                 <div> {/* Placeholder for your site's logo or name here */} </div>
-                <div className="relative">
+                <div className="relative" onClick={handleCartClick}>
                     <Image src="/shoppingcart.png" alt="Cart" width={50} height={50} />
                     <span className="absolute top-0 right-0 bg-red-600 text-white rounded-full text-sm px-2">
                         {cart.reduce((total, item) => total + item.quantity, 0)}
