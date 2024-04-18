@@ -55,7 +55,7 @@ const CheckoutPage: React.FC = () => {
 
   const calculateTotal = (cartItems: CartItem[]) => {
     const subtotal = cartItems.reduce((sum, item) => sum + item.product_price * item.quantity, 0);
-    const taxRate = 0.1; // Assuming tax rate is 10%
+    const taxRate = 0.13; // Assuming tax rate is 13%
     setTotal(subtotal + subtotal * taxRate);
   };
 
