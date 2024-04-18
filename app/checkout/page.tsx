@@ -22,10 +22,9 @@ const CheckoutPage: React.FC = () => {
       const loadedCart = localStorage.getItem('cart');
       if (loadedCart) {
         const parsedCart: CartItem[] = JSON.parse(loadedCart);
-        if (!Array.isArray(parsedCart)) {
-          throw new Error("Cart data is not an array");
-        }
-        if (parsedCart.some(item => typeof item.p_id !== 'number' || typeof item.name !== 'string' || typeof item.price !== 'number' || typeof item.quantity !== 'number')) {
+        // Validate each cart item
+        if (!Array.isArray(parsedCart) || parsedCart.some(item => typeof item.p_id !== 'number' || typeof item.name !== 'string' || 
+            typeof item.price !== 'number' || typeof item.quantity !== 'number')) {
           throw new Error("Invalid cart data format");
         }
         setCartItems(parsedCart);
@@ -39,14 +38,14 @@ const CheckoutPage: React.FC = () => {
   }, []);
 
   const calculateTotal = (items: CartItem[]) => {
-    const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const subtotal = items.reduce((sum, item: CartItem) => sum + item.price * item.quantity, 0);
     const taxRate = 0.1;  // Assuming tax rate is 10%
     const totalWithTax = subtotal + (subtotal * taxRate);
     setTotal(totalWithTax);
   };
 
   const handleRemove = (p_id: number) => {
-    const updatedCart = cartItems.filter(item => item.p_id !== p_id);
+    const updatedCart = cartItems.filter((item: CartItem) => item.p_id !== p_id);
     setCartItems(updatedCart);
     calculateTotal(updatedCart);
     localStorage.setItem('cart', JSON.stringify(updatedCart));  // Update localStorage
@@ -60,7 +59,7 @@ const CheckoutPage: React.FC = () => {
         ) : (
           <>
             <ul className="mb-4">
-              {cartItems.map(item => (
+              {cartItems.map((item: CartItem) => (
                 <li key={item.p_id} className="flex justify-between items-center py-2">
                   <div>
                     <p className="text-lg font-semibold">{item.name} - ${item.price.toFixed(2)} x {item.quantity}</p>
