@@ -1,4 +1,5 @@
-'use client'; // Add this line to indicate this is a Client Component
+// app/products/page.tsx
+'use client';
 import React, { useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
 import { getProductList } from '../lib/actions';
@@ -27,7 +28,7 @@ type Product = {
 
 const Products = () => {
   const [productList, setProductList] = useState<Product[]>([]);
-  const [cart, setCart] = useState<Product[]>([]);
+  const [cart, setCart] = useState<any[]>([]);  // Use any type temporarily to avoid TS errors
 
   useEffect(() => {
     const localData = typeof window !== 'undefined' ? localStorage.getItem('cart') : null;
@@ -40,7 +41,6 @@ const Products = () => {
       const productList = await getProductList();
       setProductList(productList as Product[]);
     }
-
     fetchProduct();
   }, []);
 
@@ -51,10 +51,24 @@ const Products = () => {
   }, [cart]);
 
   const addToCart = (product: Product) => {
-    setCart((prevCart: Product[]) => [...prevCart, product]);
+    const newItem = {
+      p_id: product.p_id,
+      name: product.product_name,
+      price: product.product_price,
+      quantity: 1
+    };
+
+    const existingIndex = cart.findIndex((item: any) => item.p_id === newItem.p_id);
+    if (existingIndex !== -1) {
+      const newCart = [...cart];
+      newCart[existingIndex].quantity += 1;
+      setCart(newCart);
+    } else {
+      setCart([...cart, newItem]);
+    }
   };
 
-  const totalItemsInCart = cart.reduce((total, item) => total + 1, 0);
+  const totalItemsInCart = cart.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <>
@@ -73,7 +87,7 @@ const Products = () => {
           <p>This is the products page.</p>
           <br />
           <div className="flex flex-wrap justify-center gap-4">
-            {productList.map((product, index) => (
+            {productList.map((product) => (
               <ProductCard key={product.p_id} product={product} onAddToCart={() => addToCart(product)} />
             ))}
           </div>
