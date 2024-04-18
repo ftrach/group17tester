@@ -21,11 +21,13 @@ const CheckoutPage: React.FC = () => {
       const loadedCart = localStorage.getItem('cart');
       if (loadedCart) {
         const parsedCart: CartItem[] = JSON.parse(loadedCart);
-        if (!Array.isArray(parsedCart)) {
-          throw new Error("Cart data is not an array");
-        }
-        if (parsedCart.some(item => typeof item.p_id !== 'number' || typeof item.product_name !== 'string' ||
-            typeof item.product_price !== 'number' || typeof item.quantity !== 'number')) {
+        // Ensure that each cart item has all necessary properties with correct types
+        if (!Array.isArray(parsedCart) || !parsedCart.every(item => 
+            typeof item === 'object' &&
+            typeof item.p_id === 'number' &&
+            typeof item.product_name === 'string' &&
+            typeof item.product_price === 'number' &&
+            typeof item.quantity === 'number')) {
           throw new Error("Invalid cart data format");
         }
         setCartItems(parsedCart);
@@ -34,17 +36,13 @@ const CheckoutPage: React.FC = () => {
         throw new Error("No cart items found");
       }
     } catch (e) {
-      if (e instanceof Error) {
-        setError(e.message);
-      } else {
-        setError("An unexpected error occurred");
-      }
+      setError(e instanceof Error ? e.message : "An unexpected error occurred");
     }
   }, []);
 
   const calculateTotal = (items: CartItem[]) => {
-    const subtotal = items.reduce((sum, item) => sum + item.product_price * item.quantity, 0);
-    const taxRate = 0.1;  // Assuming tax rate is 10%
+    const subtotal = items.reduce((sum, item) => sum + (item.product_price * item.quantity), 0);
+    const taxRate = 0.1; // Assuming a tax rate of 10%
     const totalWithTax = subtotal + (subtotal * taxRate);
     setTotal(totalWithTax);
   };
@@ -53,7 +51,7 @@ const CheckoutPage: React.FC = () => {
     const updatedCart = cartItems.filter(item => item.p_id !== p_id);
     setCartItems(updatedCart);
     calculateTotal(updatedCart);
-    localStorage.setItem('cart', JSON.stringify(updatedCart));  // Update localStorage
+    localStorage.setItem('cart', JSON.stringify(updatedCart)); // Update localStorage
   };
 
   return (
