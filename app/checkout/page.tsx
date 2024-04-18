@@ -1,13 +1,60 @@
 // app/checkout/page.tsx
 'use client';
 
-import React from 'react';
-import CheckoutForm from '../components/CheckoutForm'; // Make sure the path matches your structure
+import React, { useState, useEffect } from 'react';
+import CheckoutForm from '../components/CheckoutForm'; // Ensure this path matches your structure
+
+type CartItem = {
+  p_id: number;
+  name: string;
+  price: number;
+  quantity: number;
+};
 
 const CheckoutPage: React.FC = () => {
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [total, setTotal] = useState<number>(0);
+
+  useEffect(() => {
+    // Load cart data from localStorage
+    const loadedCart = localStorage.getItem('cart');
+    if (loadedCart) {
+      const parsedCart = JSON.parse(loadedCart);
+      setCartItems(parsedCart);
+      calculateTotal(parsedCart);
+    }
+  }, []);
+
+  const calculateTotal = (items: CartItem[]) => {
+    const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const taxRate = 0.1;  // Assuming tax rate is 10%
+    const totalWithTax = subtotal + (subtotal * taxRate);
+    setTotal(totalWithTax);
+  };
+
+  const handleRemove = (p_id: number) => {
+    const updatedCart = cartItems.filter(item => item.p_id !== p_id);
+    setCartItems(updatedCart);
+    calculateTotal(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));  // Update localStorage
+  };
+
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col justify-center items-center">
       <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
+        <ul className="mb-4">
+          {cartItems.map(item => (
+            <li key={item.p_id} className="flex justify-between items-center py-2">
+              <div>
+                <p className="text-lg font-semibold">{item.name} - ${item.price.toFixed(2)} x {item.quantity}</p>
+              </div>
+              <button onClick={() => handleRemove(item.p_id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded">
+                Remove
+              </button>
+            </li>
+          ))}
+        </ul>
+        <p className="text-lg font-bold mb-4">Total (incl. taxes): ${total.toFixed(2)}</p>
         <CheckoutForm />
       </div>
     </div>
@@ -15,4 +62,3 @@ const CheckoutPage: React.FC = () => {
 };
 
 export default CheckoutPage;
-//
