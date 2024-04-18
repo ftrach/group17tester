@@ -5,10 +5,10 @@ import React, { useState, useEffect } from 'react';
 import CheckoutForm from '../components/CheckoutForm'; // Ensure this path matches your structure
 
 type CartItem = {
-  p_id: number;                  // Directly maps to p_id in Product
-  product_name: string;          // Directly maps to product_name in Product
-  product_price: number;         // Directly maps to product_price in Product
-  quantity: number;              // Specific to cart for tracking quantity of each product
+  p_id: number;
+  product_name: string;   // This should match 'product_name' as stored from Products page
+  product_price: number;  // This should match 'product_price' as stored from Products page
+  quantity: number;       // This should properly reflect the quantity added to cart
 };
 
 const CheckoutPage: React.FC = () => {
@@ -21,11 +21,14 @@ const CheckoutPage: React.FC = () => {
       const loadedCart = localStorage.getItem('cart');
       if (loadedCart) {
         const parsedCart: CartItem[] = JSON.parse(loadedCart);
-        if (!Array.isArray(parsedCart)) {
-          throw new Error("Cart data is not an array");
-        }
-        if (parsedCart.some(item => typeof item.p_id !== 'number' || typeof item.product_name !== 'string' || 
-            typeof item.product_price !== 'number' || typeof item.quantity !== 'number')) {
+        // Verify that each item has all necessary properties with correct types
+        const isValid = parsedCart.every(item =>
+          item.hasOwnProperty('p_id') && typeof item.p_id === 'number' &&
+          item.hasOwnProperty('product_name') && typeof item.product_name === 'string' &&
+          item.hasOwnProperty('product_price') && typeof item.product_price === 'number' &&
+          item.hasOwnProperty('quantity') && typeof item.quantity === 'number'
+        );
+        if (!isValid) {
           throw new Error("Invalid cart data format");
         }
         setCartItems(parsedCart);
@@ -39,8 +42,8 @@ const CheckoutPage: React.FC = () => {
   }, []);
 
   const calculateTotal = (items: CartItem[]) => {
-    const subtotal = items.reduce((sum, item) => sum + item.product_price * item.quantity, 0);
-    const taxRate = 0.1;  // Assuming tax rate is 10%
+    const subtotal = items.reduce((sum, item) => sum + (item.product_price * item.quantity), 0);
+    const taxRate = 0.1;  // Assuming a tax rate of 10%
     const totalWithTax = subtotal + (subtotal * taxRate);
     setTotal(totalWithTax);
   };
