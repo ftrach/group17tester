@@ -25,9 +25,16 @@ type Product = {
     category: string;
 };
 
+type CartItem = {
+    p_id: number;
+    product_name: string;
+    product_price: number; // Making sure product_price is a number
+    quantity: number;
+};
+
 const Products = () => {
     const [productList, setProductList] = useState<Product[]>([]);
-    const [cart, setCart] = useState<any[]>([]);
+    const [cart, setCart] = useState<CartItem[]>([]);
 
     useEffect(() => {
         async function fetchProduct() {
@@ -39,7 +46,13 @@ const Products = () => {
 
     useEffect(() => {
         const localData = typeof window !== 'undefined' ? localStorage.getItem('cart') : null;
-        setCart(localData ? JSON.parse(localData) : []);
+        if (localData) {
+            const cartItems: CartItem[] = JSON.parse(localData).map((item: any) => ({
+                ...item,
+                product_price: Number(item.product_price) // Ensure conversion to number
+            }));
+            setCart(cartItems);
+        }
     }, []);
 
     useEffect(() => {
@@ -49,20 +62,20 @@ const Products = () => {
     }, [cart]);
 
     const addToCart = (product: Product) => {
-        const newItem = {
+        const newItem: CartItem = {
             p_id: product.p_id,
             product_name: product.product_name,
-            product_price: parseFloat(product.product_price), // Ensure this is a number
-            quantity: 1 // Initialize quantity
+            product_price: Number(product.product_price), // Convert to number immediately
+            quantity: 1  // Initialize quantity
         };
 
         const existingIndex = cart.findIndex((item) => item.p_id === newItem.p_id);
         if (existingIndex !== -1) {
-            cart[existingIndex].quantity += 1;
-            setCart([...cart]);
+            cart[existingIndex].quantity += 1; // Increment the quantity
         } else {
-            setCart([...cart, newItem]);
+            cart.push(newItem); // Add new item to the cart
         }
+        setCart([...cart]); // Update state to trigger re-render
     };
 
     return (
