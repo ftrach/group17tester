@@ -25,9 +25,14 @@ type Product = {
   category: string;
 };
 
+// Extending the Product type for cart-specific properties
+type CartItem = Product & {
+  quantity: number;
+};
+
 const Products = () => {
   const [productList, setProductList] = useState<Product[]>([]);
-  const [cart, setCart] = useState<any[]>([]);
+  const [cart, setCart] = useState<CartItem[]>([]);  // Updated to use CartItem type
 
   useEffect(() => {
     async function fetchProduct() {
@@ -50,20 +55,19 @@ const Products = () => {
   }, [cart]);
 
   const addToCart = (product: Product) => {
-    const newItem = {
-      p_id: product.p_id,
-      product_name: product.product_name,
-      product_price: product.product_price,
-      quantity: 1
+    const newItem: CartItem = {
+      ...product,
+      quantity: 1  // Initializing quantity when adding to cart
     };
 
-    const existingIndex = cart.findIndex((item: any) => item.p_id === newItem.p_id);
+    const existingIndex = cart.findIndex((item) => item.p_id === newItem.p_id);
     if (existingIndex !== -1) {
-      cart[existingIndex].quantity += 1;
+      const updatedCart = [...cart];
+      updatedCart[existingIndex].quantity += 1;  // Increment quantity
+      setCart(updatedCart);
     } else {
-      cart.push(newItem);
+      setCart([...cart, newItem]);
     }
-    setCart([...cart]);
   };
 
   return (

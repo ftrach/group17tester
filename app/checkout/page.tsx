@@ -2,7 +2,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import CheckoutForm from '../components/CheckoutForm'; // Ensure this path matches your structure
+import CheckoutForm from '../components/CheckoutForm';
 
 type CartItem = {
   p_id: number;
@@ -17,43 +17,38 @@ const CheckoutPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Load cart data from localStorage and validate
     try {
       const loadedCart = localStorage.getItem('cart');
-      if (!loadedCart) {
-        throw new Error("No cart items found");
-      }
+      if (!loadedCart) throw new Error("No cart items found");
 
-      const parsedCart: CartItem[] = JSON.parse(loadedCart);
-      if (!parsedCart.every(item => 
-          item.hasOwnProperty('p_id') && typeof item.p_id === 'number' &&
-          item.hasOwnProperty('product_name') && typeof item.product_name === 'string' &&
-          item.hasOwnProperty('product_price') && typeof item.product_price === 'number' &&
-          item.hasOwnProperty('quantity') && typeof item.quantity === 'number'
-        )) {
-        throw new Error("Invalid cart data format");
-      }
-      
+      const parsedCart = JSON.parse(loadedCart);
+      if (!Array.isArray(parsedCart)) throw new Error("Cart data should be an array");
+
+      parsedCart.forEach(item => {
+        if (typeof item !== 'object' || !('p_id' in item) || !('product_name' in item) ||
+            !('product_price' in item) || !('quantity' in item)) {
+          throw new Error(`Invalid or missing property in cart item: ${JSON.stringify(item)}`);
+        }
+      });
+
       setCartItems(parsedCart);
       calculateTotal(parsedCart);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Failed to load cart data");
+      setError(`Error processing cart data: ${e instanceof Error ? e.message : String(e)}`);
     }
   }, []);
 
-  // Calculate total price including taxes
-  const calculateTotal = (cartItems: CartItem[]) => {
-    const subtotal = cartItems.reduce((total, item) => total + item.product_price * item.quantity, 0);
-    const taxRate = 0.1; // Assuming tax rate is 10%
+  const calculateTotal = (items: CartItem[]) => {
+    const subtotal = items.reduce((sum, item) => sum + item.product_price * item.quantity, 0);
+    const taxRate = 0.1;  // Assuming a tax rate of 10%
     setTotal(subtotal + subtotal * taxRate);
   };
 
-  // Handle item removal from cart
   const handleRemove = (p_id: number) => {
     const updatedCart = cartItems.filter(item => item.p_id !== p_id);
     setCartItems(updatedCart);
     calculateTotal(updatedCart);
-    localStorage.setItem('cart', JSON.stringify(updatedCart)); // Update localStorage
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
 
   return (
