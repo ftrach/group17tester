@@ -25,9 +25,12 @@ const CheckoutPage: React.FC = () => {
       if (!Array.isArray(parsedCart)) throw new Error("Cart data should be an array");
 
       parsedCart.forEach(item => {
-        if (typeof item !== 'object' || !('p_id' in item) || !('product_name' in item) ||
-            !('product_price' in item) || !('quantity' in item)) {
-          throw new Error(`Invalid or missing property in cart item: ${JSON.stringify(item)}`);
+        if (typeof item !== 'object' ||
+            typeof item.p_id !== 'number' ||
+            typeof item.product_name !== 'string' ||
+            typeof item.product_price !== 'number' ||
+            typeof item.quantity !== 'number') {
+          throw new Error(`Invalid or incomplete cart item: ${JSON.stringify(item)}`);
         }
       });
 
@@ -38,9 +41,9 @@ const CheckoutPage: React.FC = () => {
     }
   }, []);
 
-  const calculateTotal = (items: CartItem[]) => {
-    const subtotal = items.reduce((sum, item) => sum + item.product_price * item.quantity, 0);
-    const taxRate = 0.1;  // Assuming a tax rate of 10%
+  const calculateTotal = (cartItems: CartItem[]) => {
+    const subtotal = cartItems.reduce((sum, item) => sum + (item.product_price * item.quantity), 0);
+    const taxRate = 0.1; // Assuming tax rate is 10%
     setTotal(subtotal + subtotal * taxRate);
   };
 
@@ -48,7 +51,7 @@ const CheckoutPage: React.FC = () => {
     const updatedCart = cartItems.filter(item => item.p_id !== p_id);
     setCartItems(updatedCart);
     calculateTotal(updatedCart);
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    localStorage.setItem('cart', JSON.stringify(updatedCart)); // Update localStorage
   };
 
   return (
