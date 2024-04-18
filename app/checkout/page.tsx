@@ -19,18 +19,30 @@ const CheckoutPage: React.FC = () => {
   useEffect(() => {
     try {
       const loadedCart = localStorage.getItem('cart');
-      if (!loadedCart) throw new Error("No cart items found");
+      if (!loadedCart) {
+        throw new Error("No cart items found.");
+      }
 
       const parsedCart = JSON.parse(loadedCart);
-      if (!Array.isArray(parsedCart)) throw new Error("Cart data should be an array");
+      if (!Array.isArray(parsedCart)) {
+        throw new Error("Cart data should be an array.");
+      }
 
-      parsedCart.forEach(item => {
-        if (typeof item !== 'object' ||
-            typeof item.p_id !== 'number' ||
-            typeof item.product_name !== 'string' ||
-            typeof item.product_price !== 'number' ||
-            typeof item.quantity !== 'number') {
-          throw new Error(`Invalid or incomplete cart item: ${JSON.stringify(item)}`);
+      parsedCart.forEach((item, index) => {
+        if (typeof item !== 'object') {
+          throw new Error(`Item at index ${index} is not an object.`);
+        }
+        if (typeof item.p_id !== 'number') {
+          throw new Error(`Item at index ${index} has invalid 'p_id': ${item.p_id}.`);
+        }
+        if (typeof item.product_name !== 'string') {
+          throw new Error(`Item at index ${index} has invalid 'product_name': ${item.product_name}.`);
+        }
+        if (typeof item.product_price !== 'number') {
+          throw new Error(`Item at index ${index} has invalid 'product_price': ${item.product_price}.`);
+        }
+        if (typeof item.quantity !== 'number') {
+          throw new Error(`Item at index ${index} has invalid 'quantity': ${item.quantity}.`);
         }
       });
 
@@ -42,7 +54,7 @@ const CheckoutPage: React.FC = () => {
   }, []);
 
   const calculateTotal = (cartItems: CartItem[]) => {
-    const subtotal = cartItems.reduce((sum, item) => sum + (item.product_price * item.quantity), 0);
+    const subtotal = cartItems.reduce((sum, item) => sum + item.product_price * item.quantity, 0);
     const taxRate = 0.1; // Assuming tax rate is 10%
     setTotal(subtotal + subtotal * taxRate);
   };
